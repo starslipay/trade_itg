@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package trade_itg;
+// 相对路径;包名
+option go_package = "./trade_itg_pb";
+
+message C2cTransferPreReq {
+    string buyer_user_id = 1;
+}
+
+message C2cTransferPreRsp {
+    string buyer_user_id = 1;
+    string transaction_id = 2;
+}
+
+message C2cTransferDoReq {
+    string transaction_id = 1;
+    string buyer_user_id = 2;
+    string seller_user_id = 3;
+    int64 amount = 4;
+    int32 cur_type = 5;
+    int32 verify_type = 6;
+    string password = 7;
+}
+
+message C2cTransferDoRsp {
+    string transaction_id = 1;
+    string buyer_user_id = 2;
+    string seller_user_id = 3;
+    bool is_repeat = 4;
+}
+
+service TradeItg {
+    rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
+    rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
+}
+
+/*
+生成项目框架
+goctl rpc protoc trade_itg.proto --go_out=. --go-grpc_out=. --zrpc_out=.
+*/
