@@ -50,7 +50,7 @@ message Bank2CDoReq {
 message Bank2CDoRsp {
     string transaction_id = 1;
     string user_id = 2;
-    bool is_repeat = 3;
+    int32 is_repeat = 3;
 }
 
 service TradeItg {

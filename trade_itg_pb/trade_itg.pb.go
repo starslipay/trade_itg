@@ -379,8 +379,7 @@ type Bank2CDoReq struct {
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	BankType      int32                  `protobuf:"varint,3,opt,name=bank_type,json=bankType,proto3" json:"bank_type,omitempty"`
 	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
-	CurType       int32                  `protobuf:"varint,5,opt,name=cur_type,json=curType,proto3" json:"cur_type,omitempty"`
-	Desc          string                 `protobuf:"bytes,6,opt,name=desc,proto3" json:"desc,omitempty"`
+	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -443,13 +442,6 @@ func (x *Bank2CDoReq) GetAmount() int64 {
 	return 0
 }
 
-func (x *Bank2CDoReq) GetCurType() int32 {
-	if x != nil {
-		return x.CurType
-	}
-	return 0
-}
-
 func (x *Bank2CDoReq) GetDesc() string {
 	if x != nil {
 		return x.Desc
@@ -461,7 +453,7 @@ type Bank2CDoRsp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	IsRepeat      bool                   `protobuf:"varint,3,opt,name=is_repeat,json=isRepeat,proto3" json:"is_repeat,omitempty"`
+	IsRepeat      int32                  `protobuf:"varint,3,opt,name=is_repeat,json=isRepeat,proto3" json:"is_repeat,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -510,11 +502,11 @@ func (x *Bank2CDoRsp) GetUserId() string {
 	return ""
 }
 
-func (x *Bank2CDoRsp) GetIsRepeat() bool {
+func (x *Bank2CDoRsp) GetIsRepeat() int32 {
 	if x != nil {
 		return x.IsRepeat
 	}
-	return false
+	return 0
 }
 
 var File_trade_itg_proto protoreflect.FileDescriptor
@@ -545,18 +537,17 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
 	"\fBank2CPreRsp\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xb1\x01\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\x96\x01\n" +
 	"\vBank2CDoReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tbank_type\x18\x03 \x01(\x05R\bbankType\x12\x16\n" +
-	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12\x19\n" +
-	"\bcur_type\x18\x05 \x01(\x05R\acurType\x12\x12\n" +
-	"\x04desc\x18\x06 \x01(\tR\x04desc\"j\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12\x12\n" +
+	"\x04desc\x18\x05 \x01(\tR\x04desc\"j\n" +
 	"\vBank2CDoRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
-	"\tis_repeat\x18\x03 \x01(\bR\bisRepeat2\x9e\x02\n" +
+	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat2\x9e\x02\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
