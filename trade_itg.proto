@@ -27,7 +27,7 @@ message C2cTransferDoRsp {
     string transaction_id = 1;
     string buyer_user_id = 2;
     string seller_user_id = 3;
-    bool is_repeat = 4;
+    int32 is_repeat = 4;
 }
 
 message Bank2CPreReq {

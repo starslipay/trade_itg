@@ -50,6 +50,6 @@ func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Ba
 	return &trade_itg_pb.Bank2CDoRsp{
 		TransactionId: bank2CRsp.TransactionId,
 		UserId:        bank2CRsp.UserId,
-		IsRepeat:      false,
+		IsRepeat:      0,
 	}, nil
 }
