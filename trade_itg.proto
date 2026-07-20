@@ -45,6 +45,8 @@ message Bank2CDoReq {
     int32 bank_type = 3;
     int64 amount = 4;
     string desc = 5;
+    int32 verify_type = 6;
+    string password = 7;
 }
 
 message Bank2CDoRsp {

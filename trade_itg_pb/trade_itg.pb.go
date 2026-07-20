@@ -380,6 +380,8 @@ type Bank2CDoReq struct {
 	BankType      int32                  `protobuf:"varint,3,opt,name=bank_type,json=bankType,proto3" json:"bank_type,omitempty"`
 	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
+	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
+	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -445,6 +447,20 @@ func (x *Bank2CDoReq) GetAmount() int64 {
 func (x *Bank2CDoReq) GetDesc() string {
 	if x != nil {
 		return x.Desc
+	}
+	return ""
+}
+
+func (x *Bank2CDoReq) GetVerifyType() int32 {
+	if x != nil {
+		return x.VerifyType
+	}
+	return 0
+}
+
+func (x *Bank2CDoReq) GetPassword() string {
+	if x != nil {
+		return x.Password
 	}
 	return ""
 }
@@ -537,13 +553,16 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
 	"\fBank2CPreRsp\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\x96\x01\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xd3\x01\n" +
 	"\vBank2CDoReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
 	"\tbank_type\x18\x03 \x01(\x05R\bbankType\x12\x16\n" +
 	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12\x12\n" +
-	"\x04desc\x18\x05 \x01(\tR\x04desc\"j\n" +
+	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x1f\n" +
+	"\vverify_type\x18\x06 \x01(\x05R\n" +
+	"verifyType\x12\x1a\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\"j\n" +
 	"\vBank2CDoRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
