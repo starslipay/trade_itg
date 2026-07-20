@@ -14,6 +14,10 @@ import (
 )
 
 type (
+	Bank2CDoReq       = trade_itg_pb.Bank2CDoReq
+	Bank2CDoRsp       = trade_itg_pb.Bank2CDoRsp
+	Bank2CPreReq      = trade_itg_pb.Bank2CPreReq
+	Bank2CPreRsp      = trade_itg_pb.Bank2CPreRsp
 	C2CTransferDoReq  = trade_itg_pb.C2CTransferDoReq
 	C2CTransferDoRsp  = trade_itg_pb.C2CTransferDoRsp
 	C2CTransferPreReq = trade_itg_pb.C2CTransferPreReq
@@ -22,6 +26,8 @@ type (
 	TradeItg interface {
 		C2CTransferPre(ctx context.Context, in *C2CTransferPreReq, opts ...grpc.CallOption) (*C2CTransferPreRsp, error)
 		C2CTransferDo(ctx context.Context, in *C2CTransferDoReq, opts ...grpc.CallOption) (*C2CTransferDoRsp, error)
+		Bank2CPre(ctx context.Context, in *Bank2CPreReq, opts ...grpc.CallOption) (*Bank2CPreRsp, error)
+		Bank2CDo(ctx context.Context, in *Bank2CDoReq, opts ...grpc.CallOption) (*Bank2CDoRsp, error)
 	}
 
 	defaultTradeItg struct {
@@ -43,4 +49,14 @@ func (m *defaultTradeItg) C2CTransferPre(ctx context.Context, in *C2CTransferPre
 func (m *defaultTradeItg) C2CTransferDo(ctx context.Context, in *C2CTransferDoReq, opts ...grpc.CallOption) (*C2CTransferDoRsp, error) {
 	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
 	return client.C2CTransferDo(ctx, in, opts...)
+}
+
+func (m *defaultTradeItg) Bank2CPre(ctx context.Context, in *Bank2CPreReq, opts ...grpc.CallOption) (*Bank2CPreRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.Bank2CPre(ctx, in, opts...)
+}
+
+func (m *defaultTradeItg) Bank2CDo(ctx context.Context, in *Bank2CDoReq, opts ...grpc.CallOption) (*Bank2CDoRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.Bank2CDo(ctx, in, opts...)
 }

@@ -30,9 +30,34 @@ message C2cTransferDoRsp {
     bool is_repeat = 4;
 }
 
+message Bank2CPreReq {
+    string user_id = 1;
+}
+
+message Bank2CPreRsp {
+    string user_id = 1;
+    string transaction_id = 2;
+}
+
+message Bank2CDoReq {
+    string transaction_id = 1;
+    string user_id = 2;
+    int32 bank_type = 3;
+    int64 amount = 4;
+    string desc = 5;
+}
+
+message Bank2CDoRsp {
+    string transaction_id = 1;
+    string user_id = 2;
+    bool is_repeat = 3;
+}
+
 service TradeItg {
     rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
     rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
+    rpc Bank2CPre(Bank2CPreReq) returns (Bank2CPreRsp);
+    rpc Bank2CDo(Bank2CDoReq) returns (Bank2CDoRsp);
 }
 
 /*

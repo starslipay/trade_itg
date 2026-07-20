@@ -3,7 +3,8 @@ module github.com/starslipay/trade_itg
 go 1.25.4
 
 require (
-	github.com/starslipay/account_mgr v1.0.2
+	github.com/starslipay/account_mgr v1.0.3
+	github.com/starslipay/trade_id_mgr v0.0.0-20260717053558-c4d57265c180
 	github.com/starslipay/user_mgr v1.0.1
 	github.com/zeromicro/go-zero v1.10.2
 	google.golang.org/grpc v1.82.0
@@ -54,7 +55,6 @@ require (
 	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/redis/go-redis/v9 v9.19.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/starslipay/trade_id_mgr v0.0.0-20260717053558-c4d57265c180 // indirect
 	github.com/titanous/json5 v1.0.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.21 // indirect
