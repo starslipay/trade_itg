@@ -27,9 +27,9 @@ func NewC2cTransferDoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C2c
 }
 
 func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*trade_itg_pb.C2CTransferDoRsp, error) {
-	// 查询relation
-	buyerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
-		UserId: in.BuyerUserId,
+	checkPasswordRsp, err := l.svcCtx.UserMgrRpcClient.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+		UserId:   in.BuyerUserId,
+		Password: in.Password,
 	})
 	if err != nil {
 		return nil, xerr.NewServerInternalError(err.Error())
@@ -44,7 +44,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 
 	c2CLocalRsp, err := l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
 		TransactionId: in.TransactionId,
-		BuyerUid:      buyerRelationRsp.Uid,
+		BuyerUid:      checkPasswordRsp.Uid,
 		BuyerUserId:   in.BuyerUserId,
 		SellerUid:     sellerRelationRsp.Uid,
 		SellerUserId:  in.SellerUserId,

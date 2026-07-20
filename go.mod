@@ -4,8 +4,8 @@ go 1.25.4
 
 require (
 	github.com/starslipay/account_mgr v1.0.3
-	github.com/starslipay/trade_id_mgr v0.0.0-20260717053558-c4d57265c180
-	github.com/starslipay/user_mgr v1.0.1
+	github.com/starslipay/trade_id_mgr v0.0.0-20260720063512-3bf34b953db9
+	github.com/starslipay/user_mgr v1.0.4
 	github.com/zeromicro/go-zero v1.10.2
 	google.golang.org/grpc v1.82.0
 	google.golang.org/protobuf v1.36.11

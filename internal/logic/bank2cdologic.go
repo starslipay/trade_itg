@@ -27,9 +27,9 @@ func NewBank2CDoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Bank2CDo
 }
 
 func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Bank2CDoRsp, error) {
-	// 查询relation
-	relationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
-		UserId: in.UserId,
+	checkPasswordRsp, err := l.svcCtx.UserMgrRpcClient.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+		UserId:   in.UserId,
+		Password: in.Password,
 	})
 	if err != nil {
 		return nil, xerr.NewServerInternalError(err.Error())
@@ -38,7 +38,7 @@ func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Ba
 	bank2CRsp, err := l.svcCtx.AccountMgrRpcClient.Bank2C(l.ctx, &account_mgr_pb.Bank2CReq{
 		TransactionId: in.TransactionId,
 		UserId:        in.UserId,
-		Uid:           relationRsp.Uid,
+		Uid:           checkPasswordRsp.Uid,
 		BankType:      in.BankType,
 		Amount:        in.Amount,
 		CurType:       1,
