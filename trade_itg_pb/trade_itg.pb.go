@@ -214,7 +214,7 @@ type C2CTransferDoRsp struct {
 	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	BuyerUserId   string                 `protobuf:"bytes,2,opt,name=buyer_user_id,json=buyerUserId,proto3" json:"buyer_user_id,omitempty"`
 	SellerUserId  string                 `protobuf:"bytes,3,opt,name=seller_user_id,json=sellerUserId,proto3" json:"seller_user_id,omitempty"`
-	IsRepeat      bool                   `protobuf:"varint,4,opt,name=is_repeat,json=isRepeat,proto3" json:"is_repeat,omitempty"`
+	IsRepeat      int32                  `protobuf:"varint,4,opt,name=is_repeat,json=isRepeat,proto3" json:"is_repeat,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,11 +270,11 @@ func (x *C2CTransferDoRsp) GetSellerUserId() string {
 	return ""
 }
 
-func (x *C2CTransferDoRsp) GetIsRepeat() bool {
+func (x *C2CTransferDoRsp) GetIsRepeat() int32 {
 	if x != nil {
 		return x.IsRepeat
 	}
-	return false
+	return 0
 }
 
 type Bank2CPreReq struct {
@@ -532,7 +532,7 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\"\n" +
 	"\rbuyer_user_id\x18\x02 \x01(\tR\vbuyerUserId\x12$\n" +
 	"\x0eseller_user_id\x18\x03 \x01(\tR\fsellerUserId\x12\x1b\n" +
-	"\tis_repeat\x18\x04 \x01(\bR\bisRepeat\"'\n" +
+	"\tis_repeat\x18\x04 \x01(\x05R\bisRepeat\"'\n" +
 	"\fBank2CPreReq\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
 	"\fBank2CPreRsp\x12\x17\n" +

@@ -3,8 +3,11 @@ package logic
 import (
 	"context"
 
+	"github.com/starslipay/account_mgr/account_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
+	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
+	"github.com/starslipay/user_mgr/user_mgr_pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,5 +27,38 @@ func NewC2cTransferDoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C2c
 }
 
 func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*trade_itg_pb.C2CTransferDoRsp, error) {
-	return &trade_itg_pb.C2CTransferDoRsp{}, nil
+	// 查询relation
+	buyerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
+		UserId: in.BuyerUserId,
+	})
+	if err != nil {
+		return nil, xerr.NewServerInternalError(err.Error())
+	}
+
+	sellerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
+		UserId: in.SellerUserId,
+	})
+	if err != nil {
+		return nil, xerr.NewServerInternalError(err.Error())
+	}
+
+	c2CLocalRsp, err := l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
+		TransactionId: in.TransactionId,
+		BuyerUid:      buyerRelationRsp.Uid,
+		BuyerUserId:   in.BuyerUserId,
+		SellerUid:     sellerRelationRsp.Uid,
+		SellerUserId:  in.SellerUserId,
+		Amount:        in.Amount,
+		CurType:       1,
+		Desc:          "c2c transfer",
+	})
+	if err != nil {
+		return nil, xerr.NewServerInternalError(err.Error())
+	}
+	return &trade_itg_pb.C2CTransferDoRsp{
+		TransactionId: c2CLocalRsp.TransactionId,
+		BuyerUserId:   c2CLocalRsp.BuyerUserId,
+		SellerUserId:  c2CLocalRsp.SellerUserId,
+		IsRepeat:      0,
+	}, nil
 }
