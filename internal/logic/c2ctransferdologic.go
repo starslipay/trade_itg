@@ -4,9 +4,12 @@ import (
 	"context"
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
+	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_itg/internal/svc"
+	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
+	"google.golang.org/grpc/codes"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -38,6 +41,12 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		UserId: in.SellerUserId,
 	})
 	if err != nil {
+		bizError, isSuccessParse := xerror.ParseBizError(err)
+		if isSuccessParse {
+			if bizError.Code == xerr.UserMgrErrCodeUserNotExist {
+				return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeSellerNotExist, "seller not exist")
+			}
+		}
 		return nil, err
 	}
 

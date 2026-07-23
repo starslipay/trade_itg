@@ -13,9 +13,11 @@ var (
 	ErrCodeSystem = ModuleErrorBase + 0
 
 	// 业务错误码 1000-1999
-	ErrCodeParam                                   = ModuleErrorBase + 1000
-	ErrCodeUserNotExist                            = ModuleErrorBase + 1001
-	ErrCodePasswordWrong                           = ModuleErrorBase + 1002
-	ErrCodeUserAlreadyRegistered                   = ModuleErrorBase + 1003
-	ErrCodeRelationStateNotRegisteringOrRegistered = ModuleErrorBase + 1004
+	// 卖方不存在
+	ErrCodeSellerNotExist = ModuleErrorBase + 1000
+)
+
+var (
+	// user_mgr 错误码
+	UserMgrErrCodeUserNotExist = int64(200001001)
 )
