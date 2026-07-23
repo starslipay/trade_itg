@@ -5,7 +5,6 @@ import (
 
 	"github.com/starslipay/trade_id_mgr/trade_id_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 
 	"github.com/starslipay/user_mgr/user_mgr_pb"
@@ -32,7 +31,7 @@ func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq)
 		UserId: in.BuyerUserId,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 
 	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
@@ -42,7 +41,7 @@ func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq)
 		SceneId: 1,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 
 	return &trade_itg_pb.C2CTransferPreRsp{

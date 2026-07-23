@@ -5,7 +5,6 @@ import (
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -32,14 +31,14 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		Password: in.Password,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 
 	sellerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
 		UserId: in.SellerUserId,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 
 	c2CLocalRsp, err := l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
@@ -53,7 +52,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		Desc:          "c2c transfer",
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 	return &trade_itg_pb.C2CTransferDoRsp{
 		TransactionId: c2CLocalRsp.TransactionId,

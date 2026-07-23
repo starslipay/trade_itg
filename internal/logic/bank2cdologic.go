@@ -5,7 +5,6 @@ import (
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -32,7 +31,7 @@ func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Ba
 		Password: in.Password,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 
 	bank2CRsp, err := l.svcCtx.AccountMgrRpcClient.Bank2C(l.ctx, &account_mgr_pb.Bank2CReq{
@@ -45,7 +44,7 @@ func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Ba
 		Desc:          in.Desc,
 	})
 	if err != nil {
-		return nil, xerr.NewServerInternalError(err.Error())
+		return nil, err
 	}
 	return &trade_itg_pb.Bank2CDoRsp{
 		TransactionId: bank2CRsp.TransactionId,
