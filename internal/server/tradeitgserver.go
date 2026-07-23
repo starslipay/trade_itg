@@ -42,3 +42,13 @@ func (s *TradeItgServer) Bank2CDo(ctx context.Context, in *trade_itg_pb.Bank2CDo
 	l := logic.NewBank2CDoLogic(ctx, s.svcCtx)
 	return l.Bank2CDo(in)
 }
+
+func (s *TradeItgServer) C2BankPre(ctx context.Context, in *trade_itg_pb.C2BankPreReq) (*trade_itg_pb.C2BankPreRsp, error) {
+	l := logic.NewC2BankPreLogic(ctx, s.svcCtx)
+	return l.C2BankPre(in)
+}
+
+func (s *TradeItgServer) C2BankDo(ctx context.Context, in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2BankDoRsp, error) {
+	l := logic.NewC2BankDoLogic(ctx, s.svcCtx)
+	return l.C2BankDo(in)
+}

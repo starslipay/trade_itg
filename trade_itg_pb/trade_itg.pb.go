@@ -525,6 +525,254 @@ func (x *Bank2CDoRsp) GetIsRepeat() int32 {
 	return 0
 }
 
+type C2BankPreReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *C2BankPreReq) Reset() {
+	*x = C2BankPreReq{}
+	mi := &file_trade_itg_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *C2BankPreReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*C2BankPreReq) ProtoMessage() {}
+
+func (x *C2BankPreReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use C2BankPreReq.ProtoReflect.Descriptor instead.
+func (*C2BankPreReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *C2BankPreReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type C2BankPreRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TransactionId string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *C2BankPreRsp) Reset() {
+	*x = C2BankPreRsp{}
+	mi := &file_trade_itg_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *C2BankPreRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*C2BankPreRsp) ProtoMessage() {}
+
+func (x *C2BankPreRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use C2BankPreRsp.ProtoReflect.Descriptor instead.
+func (*C2BankPreRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *C2BankPreRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *C2BankPreRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+type C2BankDoReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	BankType      int32                  `protobuf:"varint,3,opt,name=bank_type,json=bankType,proto3" json:"bank_type,omitempty"`
+	Amount        int64                  `protobuf:"varint,4,opt,name=amount,proto3" json:"amount,omitempty"`
+	Desc          string                 `protobuf:"bytes,5,opt,name=desc,proto3" json:"desc,omitempty"`
+	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
+	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *C2BankDoReq) Reset() {
+	*x = C2BankDoReq{}
+	mi := &file_trade_itg_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *C2BankDoReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*C2BankDoReq) ProtoMessage() {}
+
+func (x *C2BankDoReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use C2BankDoReq.ProtoReflect.Descriptor instead.
+func (*C2BankDoReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *C2BankDoReq) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *C2BankDoReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *C2BankDoReq) GetBankType() int32 {
+	if x != nil {
+		return x.BankType
+	}
+	return 0
+}
+
+func (x *C2BankDoReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *C2BankDoReq) GetDesc() string {
+	if x != nil {
+		return x.Desc
+	}
+	return ""
+}
+
+func (x *C2BankDoReq) GetVerifyType() int32 {
+	if x != nil {
+		return x.VerifyType
+	}
+	return 0
+}
+
+func (x *C2BankDoReq) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type C2BankDoRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	IsRepeat      int32                  `protobuf:"varint,3,opt,name=is_repeat,json=isRepeat,proto3" json:"is_repeat,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *C2BankDoRsp) Reset() {
+	*x = C2BankDoRsp{}
+	mi := &file_trade_itg_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *C2BankDoRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*C2BankDoRsp) ProtoMessage() {}
+
+func (x *C2BankDoRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use C2BankDoRsp.ProtoReflect.Descriptor instead.
+func (*C2BankDoRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *C2BankDoRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *C2BankDoRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *C2BankDoRsp) GetIsRepeat() int32 {
+	if x != nil {
+		return x.IsRepeat
+	}
+	return 0
+}
+
 var File_trade_itg_proto protoreflect.FileDescriptor
 
 const file_trade_itg_proto_rawDesc = "" +
@@ -566,12 +814,32 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\vBank2CDoRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
-	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat2\x9e\x02\n" +
+	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat\"'\n" +
+	"\fC2BankPreReq\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
+	"\fC2BankPreRsp\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xd3\x01\n" +
+	"\vC2BankDoReq\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tbank_type\x18\x03 \x01(\x05R\bbankType\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x03R\x06amount\x12\x12\n" +
+	"\x04desc\x18\x05 \x01(\tR\x04desc\x12\x1f\n" +
+	"\vverify_type\x18\x06 \x01(\x05R\n" +
+	"verifyType\x12\x1a\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\"j\n" +
+	"\vC2BankDoRsp\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat2\x99\x03\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
 	"\tBank2CPre\x12\x17.trade_itg.Bank2CPreReq\x1a\x17.trade_itg.Bank2CPreRsp\x12:\n" +
-	"\bBank2CDo\x12\x16.trade_itg.Bank2CDoReq\x1a\x16.trade_itg.Bank2CDoRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
+	"\bBank2CDo\x12\x16.trade_itg.Bank2CDoReq\x1a\x16.trade_itg.Bank2CDoRsp\x12=\n" +
+	"\tC2BankPre\x12\x17.trade_itg.C2BankPreReq\x1a\x17.trade_itg.C2BankPreRsp\x12:\n" +
+	"\bC2BankDo\x12\x16.trade_itg.C2BankDoReq\x1a\x16.trade_itg.C2BankDoRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
 
 var (
 	file_trade_itg_proto_rawDescOnce sync.Once
@@ -585,7 +853,7 @@ func file_trade_itg_proto_rawDescGZIP() []byte {
 	return file_trade_itg_proto_rawDescData
 }
 
-var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_trade_itg_proto_goTypes = []any{
 	(*C2CTransferPreReq)(nil), // 0: trade_itg.C2cTransferPreReq
 	(*C2CTransferPreRsp)(nil), // 1: trade_itg.C2cTransferPreRsp
@@ -595,21 +863,29 @@ var file_trade_itg_proto_goTypes = []any{
 	(*Bank2CPreRsp)(nil),      // 5: trade_itg.Bank2CPreRsp
 	(*Bank2CDoReq)(nil),       // 6: trade_itg.Bank2CDoReq
 	(*Bank2CDoRsp)(nil),       // 7: trade_itg.Bank2CDoRsp
+	(*C2BankPreReq)(nil),      // 8: trade_itg.C2BankPreReq
+	(*C2BankPreRsp)(nil),      // 9: trade_itg.C2BankPreRsp
+	(*C2BankDoReq)(nil),       // 10: trade_itg.C2BankDoReq
+	(*C2BankDoRsp)(nil),       // 11: trade_itg.C2BankDoRsp
 }
 var file_trade_itg_proto_depIdxs = []int32{
-	0, // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
-	2, // 1: trade_itg.TradeItg.C2cTransferDo:input_type -> trade_itg.C2cTransferDoReq
-	4, // 2: trade_itg.TradeItg.Bank2CPre:input_type -> trade_itg.Bank2CPreReq
-	6, // 3: trade_itg.TradeItg.Bank2CDo:input_type -> trade_itg.Bank2CDoReq
-	1, // 4: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
-	3, // 5: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
-	5, // 6: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
-	7, // 7: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
+	2,  // 1: trade_itg.TradeItg.C2cTransferDo:input_type -> trade_itg.C2cTransferDoReq
+	4,  // 2: trade_itg.TradeItg.Bank2CPre:input_type -> trade_itg.Bank2CPreReq
+	6,  // 3: trade_itg.TradeItg.Bank2CDo:input_type -> trade_itg.Bank2CDoReq
+	8,  // 4: trade_itg.TradeItg.C2BankPre:input_type -> trade_itg.C2BankPreReq
+	10, // 5: trade_itg.TradeItg.C2BankDo:input_type -> trade_itg.C2BankDoReq
+	1,  // 6: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
+	3,  // 7: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
+	5,  // 8: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
+	7,  // 9: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
+	9,  // 10: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
+	11, // 11: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
+	6,  // [6:12] is the sub-list for method output_type
+	0,  // [0:6] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_trade_itg_proto_init() }
@@ -623,7 +899,7 @@ func file_trade_itg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_itg_proto_rawDesc), len(file_trade_itg_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

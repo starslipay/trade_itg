@@ -55,11 +55,38 @@ message Bank2CDoRsp {
     int32 is_repeat = 3;
 }
 
+message C2BankPreReq {
+    string user_id = 1;
+}
+
+message C2BankPreRsp {
+    string user_id = 1;
+    string transaction_id = 2;
+}
+
+message C2BankDoReq {
+    string transaction_id = 1;
+    string user_id = 2;
+    int32 bank_type = 3;
+    int64 amount = 4;
+    string desc = 5;
+    int32 verify_type = 6;
+    string password = 7;
+}
+
+message C2BankDoRsp {
+    string transaction_id = 1;
+    string user_id = 2;
+    int32 is_repeat = 3;
+}
+
 service TradeItg {
     rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
     rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
     rpc Bank2CPre(Bank2CPreReq) returns (Bank2CPreRsp);
     rpc Bank2CDo(Bank2CDoReq) returns (Bank2CDoRsp);
+    rpc C2BankPre(C2BankPreReq) returns (C2BankPreRsp);
+    rpc C2BankDo(C2BankDoReq) returns (C2BankDoRsp);
 }
 
 /*

@@ -23,6 +23,8 @@ const (
 	TradeItg_C2CTransferDo_FullMethodName  = "/trade_itg.TradeItg/C2cTransferDo"
 	TradeItg_Bank2CPre_FullMethodName      = "/trade_itg.TradeItg/Bank2CPre"
 	TradeItg_Bank2CDo_FullMethodName       = "/trade_itg.TradeItg/Bank2CDo"
+	TradeItg_C2BankPre_FullMethodName      = "/trade_itg.TradeItg/C2BankPre"
+	TradeItg_C2BankDo_FullMethodName       = "/trade_itg.TradeItg/C2BankDo"
 )
 
 // TradeItgClient is the client API for TradeItg service.
@@ -33,6 +35,8 @@ type TradeItgClient interface {
 	C2CTransferDo(ctx context.Context, in *C2CTransferDoReq, opts ...grpc.CallOption) (*C2CTransferDoRsp, error)
 	Bank2CPre(ctx context.Context, in *Bank2CPreReq, opts ...grpc.CallOption) (*Bank2CPreRsp, error)
 	Bank2CDo(ctx context.Context, in *Bank2CDoReq, opts ...grpc.CallOption) (*Bank2CDoRsp, error)
+	C2BankPre(ctx context.Context, in *C2BankPreReq, opts ...grpc.CallOption) (*C2BankPreRsp, error)
+	C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error)
 }
 
 type tradeItgClient struct {
@@ -83,6 +87,26 @@ func (c *tradeItgClient) Bank2CDo(ctx context.Context, in *Bank2CDoReq, opts ...
 	return out, nil
 }
 
+func (c *tradeItgClient) C2BankPre(ctx context.Context, in *C2BankPreReq, opts ...grpc.CallOption) (*C2BankPreRsp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(C2BankPreRsp)
+	err := c.cc.Invoke(ctx, TradeItg_C2BankPre_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tradeItgClient) C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(C2BankDoRsp)
+	err := c.cc.Invoke(ctx, TradeItg_C2BankDo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TradeItgServer is the server API for TradeItg service.
 // All implementations must embed UnimplementedTradeItgServer
 // for forward compatibility.
@@ -91,6 +115,8 @@ type TradeItgServer interface {
 	C2CTransferDo(context.Context, *C2CTransferDoReq) (*C2CTransferDoRsp, error)
 	Bank2CPre(context.Context, *Bank2CPreReq) (*Bank2CPreRsp, error)
 	Bank2CDo(context.Context, *Bank2CDoReq) (*Bank2CDoRsp, error)
+	C2BankPre(context.Context, *C2BankPreReq) (*C2BankPreRsp, error)
+	C2BankDo(context.Context, *C2BankDoReq) (*C2BankDoRsp, error)
 	mustEmbedUnimplementedTradeItgServer()
 }
 
@@ -112,6 +138,12 @@ func (UnimplementedTradeItgServer) Bank2CPre(context.Context, *Bank2CPreReq) (*B
 }
 func (UnimplementedTradeItgServer) Bank2CDo(context.Context, *Bank2CDoReq) (*Bank2CDoRsp, error) {
 	return nil, status.Error(codes.Unimplemented, "method Bank2CDo not implemented")
+}
+func (UnimplementedTradeItgServer) C2BankPre(context.Context, *C2BankPreReq) (*C2BankPreRsp, error) {
+	return nil, status.Error(codes.Unimplemented, "method C2BankPre not implemented")
+}
+func (UnimplementedTradeItgServer) C2BankDo(context.Context, *C2BankDoReq) (*C2BankDoRsp, error) {
+	return nil, status.Error(codes.Unimplemented, "method C2BankDo not implemented")
 }
 func (UnimplementedTradeItgServer) mustEmbedUnimplementedTradeItgServer() {}
 func (UnimplementedTradeItgServer) testEmbeddedByValue()                  {}
@@ -206,6 +238,42 @@ func _TradeItg_Bank2CDo_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TradeItg_C2BankPre_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(C2BankPreReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TradeItgServer).C2BankPre(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TradeItg_C2BankPre_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TradeItgServer).C2BankPre(ctx, req.(*C2BankPreReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TradeItg_C2BankDo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(C2BankDoReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TradeItgServer).C2BankDo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TradeItg_C2BankDo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TradeItgServer).C2BankDo(ctx, req.(*C2BankDoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TradeItg_ServiceDesc is the grpc.ServiceDesc for TradeItg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +296,14 @@ var TradeItg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Bank2CDo",
 			Handler:    _TradeItg_Bank2CDo_Handler,
+		},
+		{
+			MethodName: "C2BankPre",
+			Handler:    _TradeItg_C2BankPre_Handler,
+		},
+		{
+			MethodName: "C2BankDo",
+			Handler:    _TradeItg_C2BankDo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

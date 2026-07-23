@@ -3,7 +3,7 @@ module github.com/starslipay/trade_itg
 go 1.25.4
 
 require (
-	github.com/starslipay/account_mgr v1.0.3
+	github.com/starslipay/account_mgr v1.0.5
 	github.com/starslipay/trade_id_mgr v0.0.0-20260720063512-3bf34b953db9
 	github.com/starslipay/user_mgr v1.0.4
 	github.com/zeromicro/go-zero v1.10.2
@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	filippo.io/edwards25519 v1.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -26,6 +27,7 @@ require (
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
+	github.com/go-sql-driver/mysql v1.10.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.7.0 // indirect

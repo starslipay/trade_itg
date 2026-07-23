@@ -1,3 +1,5 @@
+filippo.io/edwards25519 v1.2.0 h1:crnVqOiS4jqYleHd9vaKZ+HKtHfllngJIiOpNpoJsjo=
+filippo.io/edwards25519 v1.2.0/go.mod h1:xzAOLCNug/yB62zG1bQ8uziwrIqIuxhctzJT18Q77mc=
 github.com/alicebob/miniredis/v2 v2.38.0 h1:nZAzCR+Lj+Vxk4ZXzm2NuKq2O33RXj1XxJ2e2uP9jiw=
 github.com/alicebob/miniredis/v2 v2.38.0/go.mod h1:TcL7YfarKPGDAthEtl5NBeHZfeUQj6OXMm/+iu5cLMM=
 github.com/benbjohnson/clock v1.1.0 h1:Q92kusRqC1XV2MjkWETPvjJVqKetz1OzxZB7mHJLju8=
@@ -39,6 +41,8 @@ github.com/go-openapi/jsonreference v0.20.2/go.mod h1:Bl1zwGIM8/wsvqjsOQLJ/SH+En
 github.com/go-openapi/swag v0.22.3/go.mod h1:UzaqsxGiab7freDnrUUra0MwWfN/q7tE4j+VcZ0yl14=
 github.com/go-openapi/swag v0.23.0 h1:vsEVJDUo2hPJ2tu0/Xc+4noaxyEffXNIs3cOULZ+GrE=
 github.com/go-openapi/swag v0.23.0/go.mod h1:esZ8ITTYEsH1V2trKHjAN8Ai7xHb8RV+YSZ577vPjgQ=
+github.com/go-sql-driver/mysql v1.10.0 h1:Q+1LV8DkHJvSYAdR83XzuhDaTykuDx0l6fkXxoWCWfw=
+github.com/go-sql-driver/mysql v1.10.0/go.mod h1:M+cqaI7+xxXGG9swrdeUIoPG3Y3KCkF0pZej+SK+nWk=
 github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 h1:tfuBGBXKqDEevZMzYi5KSi8KkcZtzBcTgAUUtapy0OI=
 github.com/go-task/slim-sprig/v3 v3.0.0 h1:sUs3vkvUymDpBKi3qH1YSqBQk9+9D/8M2mN1vB6EwHI=
 github.com/go-task/slim-sprig/v3 v3.0.0/go.mod h1:W848ghGpv3Qj3dhTPRyJypKRiqCdHZiAzKg9hl15HA8=
@@ -132,6 +136,8 @@ github.com/spf13/pflag v1.0.6 h1:jFzHGLGAlb3ruxLB8MhbI6A8+AQX/2eW4qeyNZXNp2o=
 github.com/spf13/pflag v1.0.6/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/starslipay/account_mgr v1.0.3 h1:Uj9CsRJ3kz6W8yJRv89rwynSTt7gi6y06IBdcsLEdX0=
 github.com/starslipay/account_mgr v1.0.3/go.mod h1:vlxOcponuimB+ezD2SlmMDLCG+1SSTRfCl6qmf07HKI=
+github.com/starslipay/account_mgr v1.0.5 h1:Aoqx5L0GluxdmNNvyAWrioF50PgLxf7r1APBTIZHJM4=
+github.com/starslipay/account_mgr v1.0.5/go.mod h1:4Wc8npSQrk4/4EyS6fNfFgbhwgZ5d7/0iXRIqJgyQUE=
 github.com/starslipay/paycomm v1.0.0 h1:CZu23RBkwbJp35+SvsbBWI96haYczxv1K2wFmiFMaGk=
 github.com/starslipay/paycomm v1.0.0/go.mod h1:FMxTnR8zdwPpifu8ZRcZKzMH9koVbDnveEv8l8OeKd0=
 github.com/starslipay/trade_id_mgr v0.0.0-20260720063512-3bf34b953db9 h1:sm7teS/DHdi/cLNtroUmkdFFtW9WJ/NxPKMDb8O9C5A=
