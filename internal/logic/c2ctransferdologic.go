@@ -45,6 +45,8 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		if isSuccessParse {
 			if bizError.Code == xerr.UserMgrErrCodeUserNotExist {
 				return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeSellerNotExist, "seller not exist")
+			} else {
+				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
 			}
 		}
 		return nil, err
@@ -63,6 +65,10 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(local)",
 		})
 		if err != nil {
+			bizError, isSuccessParse := xerror.ParseBizError(err)
+			if isSuccessParse {
+				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
+			}
 			return nil, err
 		}
 	} else if 1 == in.Version {
@@ -77,6 +83,10 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(final)",
 		})
 		if err != nil {
+			bizError, isSuccessParse := xerror.ParseBizError(err)
+			if isSuccessParse {
+				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
+			}
 			return nil, err
 		}
 	} else {
