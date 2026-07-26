@@ -126,6 +126,7 @@ type C2CTransferDoReq struct {
 	CurType       int32                  `protobuf:"varint,5,opt,name=cur_type,json=curType,proto3" json:"cur_type,omitempty"`
 	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
 	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
+	Version       int32                  `protobuf:"varint,8,opt,name=version,proto3" json:"version,omitempty"` // c2c转账版本
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -207,6 +208,13 @@ func (x *C2CTransferDoReq) GetPassword() string {
 		return x.Password
 	}
 	return ""
+}
+
+func (x *C2CTransferDoReq) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
 }
 
 type C2CTransferDoRsp struct {
@@ -782,7 +790,7 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\rbuyer_user_id\x18\x01 \x01(\tR\vbuyerUserId\"^\n" +
 	"\x11C2cTransferPreRsp\x12\"\n" +
 	"\rbuyer_user_id\x18\x01 \x01(\tR\vbuyerUserId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xf3\x01\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\x8d\x02\n" +
 	"\x10C2cTransferDoReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\"\n" +
 	"\rbuyer_user_id\x18\x02 \x01(\tR\vbuyerUserId\x12$\n" +
@@ -791,7 +799,8 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\bcur_type\x18\x05 \x01(\x05R\acurType\x12\x1f\n" +
 	"\vverify_type\x18\x06 \x01(\x05R\n" +
 	"verifyType\x12\x1a\n" +
-	"\bpassword\x18\a \x01(\tR\bpassword\"\xa0\x01\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\x12\x18\n" +
+	"\aversion\x18\b \x01(\x05R\aversion\"\xa0\x01\n" +
 	"\x10C2cTransferDoRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\"\n" +
 	"\rbuyer_user_id\x18\x02 \x01(\tR\vbuyerUserId\x12$\n" +

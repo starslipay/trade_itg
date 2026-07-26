@@ -50,19 +50,37 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		return nil, err
 	}
 
-	c2CLocalRsp, err := l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
-		TransactionId: in.TransactionId,
-		BuyerUid:      checkPasswordRsp.Uid,
-		BuyerUserId:   in.BuyerUserId,
-		SellerUid:     sellerRelationRsp.Uid,
-		SellerUserId:  in.SellerUserId,
-		Amount:        in.Amount,
-		CurType:       1,
-		Desc:          "c2c transfer",
-	})
-	if err != nil {
-		return nil, err
+	var c2CLocalRsp *account_mgr_pb.C2CRsp
+	if 0 == in.Version {
+		c2CLocalRsp, err = l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
+			TransactionId: in.TransactionId,
+			BuyerUid:      checkPasswordRsp.Uid,
+			BuyerUserId:   in.BuyerUserId,
+			SellerUid:     sellerRelationRsp.Uid,
+			SellerUserId:  in.SellerUserId,
+			Amount:        in.Amount,
+			CurType:       1,
+			Desc:          "c2c transfer(local)",
+		})
+		if err != nil {
+			return nil, err
+		}
+	} else if 1 == in.Version {
+		c2CLocalRsp, err = l.svcCtx.AccountMgrRpcClient.C2CFinal(l.ctx, &account_mgr_pb.C2CReq{
+			TransactionId: in.TransactionId,
+			BuyerUid:      checkPasswordRsp.Uid,
+			BuyerUserId:   in.BuyerUserId,
+			SellerUid:     sellerRelationRsp.Uid,
+			SellerUserId:  in.SellerUserId,
+			Amount:        in.Amount,
+			CurType:       1,
+			Desc:          "c2c transfer(final)",
+		})
+		if err != nil {
+			return nil, err
+		}
 	}
+
 	return &trade_itg_pb.C2CTransferDoRsp{
 		TransactionId: c2CLocalRsp.TransactionId,
 		BuyerUserId:   c2CLocalRsp.BuyerUserId,

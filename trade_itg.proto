@@ -21,6 +21,7 @@ message C2cTransferDoReq {
     int32 cur_type = 5;
     int32 verify_type = 6;
     string password = 7;
+    int32 version = 8;  // c2c转账版本
 }
 
 message C2cTransferDoRsp {
