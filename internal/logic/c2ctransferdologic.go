@@ -79,6 +79,8 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		if err != nil {
 			return nil, err
 		}
+	} else {
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "version invalid")
 	}
 
 	return &trade_itg_pb.C2CTransferDoRsp{

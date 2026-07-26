@@ -13,8 +13,8 @@ var (
 	ErrCodeSystem = ModuleErrorBase + 0
 
 	// 业务错误码 1000-1999
-	// 卖方不存在
-	ErrCodeSellerNotExist = ModuleErrorBase + 1000
+	ErrCodeSellerNotExist = ModuleErrorBase + 1000 // 卖方不存在
+	ErrCodeParams         = ModuleErrorBase + 1001 // 参数错误
 )
 
 var (
