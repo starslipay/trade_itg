@@ -5,6 +5,7 @@ import (
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
+	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -31,6 +32,7 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 		Password: in.Password,
 	})
 	if err != nil {
+		err = xerr.ParseRPCError(err)
 		return nil, err
 	}
 
@@ -44,6 +46,7 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 		Desc:          in.Desc,
 	})
 	if err != nil {
+		err = xerr.ParseRPCError(err)
 		return nil, err
 	}
 	return &trade_itg_pb.C2BankDoRsp{

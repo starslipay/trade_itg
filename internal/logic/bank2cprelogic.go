@@ -5,6 +5,7 @@ import (
 
 	"github.com/starslipay/trade_id_mgr/trade_id_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
+	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -31,6 +32,7 @@ func (l *Bank2CPreLogic) Bank2CPre(in *trade_itg_pb.Bank2CPreReq) (*trade_itg_pb
 		UserId: in.UserId,
 	})
 	if err != nil {
+		err = xerr.ParseRPCError(err)
 		return nil, err
 	}
 
@@ -41,6 +43,7 @@ func (l *Bank2CPreLogic) Bank2CPre(in *trade_itg_pb.Bank2CPreReq) (*trade_itg_pb
 		SceneId: 1,
 	})
 	if err != nil {
+		err = xerr.ParseRPCError(err)
 		return nil, err
 	}
 

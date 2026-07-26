@@ -92,6 +92,6 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		TransactionId: c2CLocalRsp.TransactionId,
 		BuyerUserId:   c2CLocalRsp.BuyerUserId,
 		SellerUserId:  c2CLocalRsp.SellerUserId,
-		IsRepeat:      0,
+		IsRepeat:      c2CLocalRsp.IsRepeat,
 	}, nil
 }
