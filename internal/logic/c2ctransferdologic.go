@@ -34,6 +34,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		Password: in.Password,
 	})
 	if err != nil {
+		err = xerr.ParseRPCError(err)
 		return nil, err
 	}
 
@@ -49,7 +50,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
 			}
 		}
-		return nil, err
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeCallRpc, err.Error())
 	}
 
 	var c2CLocalRsp *account_mgr_pb.C2CRsp
@@ -65,10 +66,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(local)",
 		})
 		if err != nil {
-			bizError, isSuccessParse := xerror.ParseBizError(err)
-			if isSuccessParse {
-				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
-			}
+			err = xerr.ParseRPCError(err)
 			return nil, err
 		}
 	} else if 1 == in.Version {
@@ -83,10 +81,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(final)",
 		})
 		if err != nil {
-			bizError, isSuccessParse := xerror.ParseBizError(err)
-			if isSuccessParse {
-				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
-			}
+			err = xerr.ParseRPCError(err)
 			return nil, err
 		}
 	} else {
