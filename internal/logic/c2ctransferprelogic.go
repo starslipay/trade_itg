@@ -38,7 +38,6 @@ func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq)
 
 	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
 		SpId:    "1000000000",
-		AccSet:  12,
 		Uid:     buyerRelationRsp.Uid,
 		SceneId: 1,
 	})

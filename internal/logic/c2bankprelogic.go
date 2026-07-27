@@ -38,7 +38,6 @@ func (l *C2BankPreLogic) C2BankPre(in *trade_itg_pb.C2BankPreReq) (*trade_itg_pb
 
 	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
 		SpId:    "1000000000",
-		AccSet:  12,
 		Uid:     relationRsp.Uid,
 		SceneId: 1,
 	})

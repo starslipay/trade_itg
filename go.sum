@@ -172,6 +172,8 @@ github.com/starslipay/paycomm v1.0.0 h1:CZu23RBkwbJp35+SvsbBWI96haYczxv1K2wFmiFM
 github.com/starslipay/paycomm v1.0.0/go.mod h1:FMxTnR8zdwPpifu8ZRcZKzMH9koVbDnveEv8l8OeKd0=
 github.com/starslipay/trade_id_mgr v0.0.0-20260720063512-3bf34b953db9 h1:sm7teS/DHdi/cLNtroUmkdFFtW9WJ/NxPKMDb8O9C5A=
 github.com/starslipay/trade_id_mgr v0.0.0-20260720063512-3bf34b953db9/go.mod h1:3I3JMCkZorhE6jgTkcuLQQLp0Zk2ncrFuh7R/z9Ij4I=
+github.com/starslipay/trade_id_mgr v1.0.0 h1:a5uNtIrjVUgvsi3NkZxsAxMUeFI2GUsvLVZBIhpqO4k=
+github.com/starslipay/trade_id_mgr v1.0.0/go.mod h1:QGvqPCG6GJV8jNoXu4eDUWjZXv2uzu/puP/HxEc0Lhw=
 github.com/starslipay/user_mgr v1.0.4 h1:k42H3JaBcx1fbbzWGgidw6E0BCpe/35XHWiSjNJYLAo=
 github.com/starslipay/user_mgr v1.0.4/go.mod h1:c1N+ZDv3Pq80nv+Q1iM7rXHGu7E3CqbVkTiKouizDHo=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
