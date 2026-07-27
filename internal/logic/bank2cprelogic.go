@@ -32,8 +32,7 @@ func (l *Bank2CPreLogic) Bank2CPre(in *trade_itg_pb.Bank2CPreReq) (*trade_itg_pb
 		UserId: in.UserId,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
@@ -42,8 +41,7 @@ func (l *Bank2CPreLogic) Bank2CPre(in *trade_itg_pb.Bank2CPreReq) (*trade_itg_pb
 		SceneId: 1,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	return &trade_itg_pb.Bank2CPreRsp{

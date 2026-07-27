@@ -32,8 +32,7 @@ func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq)
 		UserId: in.BuyerUserId,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
@@ -42,8 +41,7 @@ func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq)
 		SceneId: 1,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	return &trade_itg_pb.C2CTransferPreRsp{

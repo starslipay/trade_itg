@@ -32,8 +32,7 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 		Password: in.Password,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	bank2CRsp, err := l.svcCtx.AccountMgrRpcClient.C2Bank(l.ctx, &account_mgr_pb.C2BankReq{
@@ -46,8 +45,7 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 		Desc:          in.Desc,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 	return &trade_itg_pb.C2BankDoRsp{
 		TransactionId: bank2CRsp.TransactionId,

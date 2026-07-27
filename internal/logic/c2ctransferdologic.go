@@ -34,8 +34,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		Password: in.Password,
 	})
 	if err != nil {
-		err = xerr.ParseRPCError(err)
-		return nil, err
+		return nil, xerr.ParseRPCError(err)
 	}
 
 	sellerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
@@ -66,8 +65,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(local)",
 		})
 		if err != nil {
-			err = xerr.ParseRPCError(err)
-			return nil, err
+			return nil, xerr.ParseRPCError(err)
 		}
 	} else if 1 == in.Version {
 		c2CLocalRsp, err = l.svcCtx.AccountMgrRpcClient.C2CFinal(l.ctx, &account_mgr_pb.C2CReq{
@@ -81,8 +79,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(final)",
 		})
 		if err != nil {
-			err = xerr.ParseRPCError(err)
-			return nil, err
+			return nil, xerr.ParseRPCError(err)
 		}
 	} else {
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "version invalid")
