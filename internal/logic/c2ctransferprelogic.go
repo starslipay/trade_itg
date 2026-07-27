@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 
+	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_id_mgr/trade_id_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 
 	"github.com/starslipay/user_mgr/user_mgr_pb"
@@ -28,20 +28,20 @@ func NewC2cTransferPreLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C2
 
 func (l *C2cTransferPreLogic) C2CTransferPre(in *trade_itg_pb.C2CTransferPreReq) (*trade_itg_pb.C2CTransferPreRsp, error) {
 	// 查询relation
-	buyerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
+	buyerRelationRsp, err := l.svcCtx.UserMgr.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
 		UserId: in.BuyerUserId,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "UserMgr.GetRelation")
 	}
 
-	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
+	tradeIdRsp, err := l.svcCtx.TradeIdMgr.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
 		SpId:    "1000000000",
 		Uid:     buyerRelationRsp.Uid,
 		SceneId: 1,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "TradeIdMgr.GenTradeId")
 	}
 
 	return &trade_itg_pb.C2CTransferPreRsp{

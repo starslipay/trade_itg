@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
+	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -27,15 +27,15 @@ func NewBank2CDoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Bank2CDo
 }
 
 func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Bank2CDoRsp, error) {
-	checkPasswordRsp, err := l.svcCtx.UserMgrRpcClient.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+	checkPasswordRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
 		UserId:   in.UserId,
 		Password: in.Password,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "UserMgr.CheckPassword")
 	}
 
-	bank2CRsp, err := l.svcCtx.AccountMgrRpcClient.Bank2C(l.ctx, &account_mgr_pb.Bank2CReq{
+	bank2CRsp, err := l.svcCtx.AccountMgr.Bank2C(l.ctx, &account_mgr_pb.Bank2CReq{
 		TransactionId: in.TransactionId,
 		UserId:        in.UserId,
 		Uid:           checkPasswordRsp.Uid,
@@ -45,7 +45,7 @@ func (l *Bank2CDoLogic) Bank2CDo(in *trade_itg_pb.Bank2CDoReq) (*trade_itg_pb.Ba
 		Desc:          in.Desc,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "AccountMgr.Bank2C")
 	}
 	return &trade_itg_pb.Bank2CDoRsp{
 		TransactionId: bank2CRsp.TransactionId,

@@ -10,17 +10,17 @@ import (
 )
 
 type ServiceContext struct {
-	Config              config.Config
-	UserMgrRpcClient    user_mgr_pb.UserMgrClient
-	AccountMgrRpcClient account_mgr_pb.AccountMgrClient
-	TradeIdMgrRpcClient trade_id_mgr_pb.TradeIdMgrClient
+	Config     config.Config
+	UserMgr    user_mgr_pb.UserMgrClient
+	AccountMgr account_mgr_pb.AccountMgrClient
+	TradeIdMgr trade_id_mgr_pb.TradeIdMgrClient
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		Config:              c,
-		UserMgrRpcClient:    user_mgr_pb.NewUserMgrClient(zrpc.MustNewClient(c.UserMgrRpcConfig).Conn()),
-		AccountMgrRpcClient: account_mgr_pb.NewAccountMgrClient(zrpc.MustNewClient(c.AccountMgrRpcConfig).Conn()),
-		TradeIdMgrRpcClient: trade_id_mgr_pb.NewTradeIdMgrClient(zrpc.MustNewClient(c.TradeIdMgrRpcConfig).Conn()),
+		Config:     c,
+		UserMgr:    user_mgr_pb.NewUserMgrClient(zrpc.MustNewClient(c.UserMgrRpcConfig).Conn()),
+		AccountMgr: account_mgr_pb.NewAccountMgrClient(zrpc.MustNewClient(c.AccountMgrRpcConfig).Conn()),
+		TradeIdMgr: trade_id_mgr_pb.NewTradeIdMgrClient(zrpc.MustNewClient(c.TradeIdMgrRpcConfig).Conn()),
 	}
 }

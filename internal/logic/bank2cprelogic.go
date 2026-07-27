@@ -3,9 +3,9 @@ package logic
 import (
 	"context"
 
+	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_id_mgr/trade_id_mgr_pb"
 	"github.com/starslipay/trade_itg/internal/svc"
-	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
 
@@ -28,20 +28,20 @@ func NewBank2CPreLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Bank2CP
 
 func (l *Bank2CPreLogic) Bank2CPre(in *trade_itg_pb.Bank2CPreReq) (*trade_itg_pb.Bank2CPreRsp, error) {
 	// 查询relation
-	relationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
+	relationRsp, err := l.svcCtx.UserMgr.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
 		UserId: in.UserId,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "UserMgr.GetRelation")
 	}
 
-	tradeIdRsp, err := l.svcCtx.TradeIdMgrRpcClient.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
+	tradeIdRsp, err := l.svcCtx.TradeIdMgr.GenTradeId(l.ctx, &trade_id_mgr_pb.GenTradeIdReq{
 		SpId:    "1000000000",
 		Uid:     relationRsp.Uid,
 		SceneId: 1,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "TradeIdMgr.GenTradeId")
 	}
 
 	return &trade_itg_pb.Bank2CPreRsp{

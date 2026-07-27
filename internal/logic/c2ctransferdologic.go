@@ -29,7 +29,7 @@ func NewC2cTransferDoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C2c
 }
 
 func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*trade_itg_pb.C2CTransferDoRsp, error) {
-	checkPasswordRsp, err := l.svcCtx.UserMgrRpcClient.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+	checkPasswordRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
 		UserId:   in.BuyerUserId,
 		Password: in.Password,
 	})
@@ -37,7 +37,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		return nil, xerr.ParseRPCError(err)
 	}
 
-	sellerRelationRsp, err := l.svcCtx.UserMgrRpcClient.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
+	sellerRelationRsp, err := l.svcCtx.UserMgr.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
 		UserId: in.SellerUserId,
 	})
 	if err != nil {
@@ -54,7 +54,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 
 	var c2CLocalRsp *account_mgr_pb.C2CRsp
 	if 0 == in.Version {
-		c2CLocalRsp, err = l.svcCtx.AccountMgrRpcClient.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
+		c2CLocalRsp, err = l.svcCtx.AccountMgr.C2CLocal(l.ctx, &account_mgr_pb.C2CReq{
 			TransactionId: in.TransactionId,
 			BuyerUid:      checkPasswordRsp.Uid,
 			BuyerUserId:   in.BuyerUserId,
@@ -65,10 +65,10 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(local)",
 		})
 		if err != nil {
-			return nil, xerr.ParseRPCError(err)
+			return nil, xerror.HandleRPCError(err, "AccountMgr.C2CLocal")
 		}
 	} else if 1 == in.Version {
-		c2CLocalRsp, err = l.svcCtx.AccountMgrRpcClient.C2CFinal(l.ctx, &account_mgr_pb.C2CReq{
+		c2CLocalRsp, err = l.svcCtx.AccountMgr.C2CFinal(l.ctx, &account_mgr_pb.C2CReq{
 			TransactionId: in.TransactionId,
 			BuyerUid:      checkPasswordRsp.Uid,
 			BuyerUserId:   in.BuyerUserId,
@@ -79,7 +79,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 			Desc:          "c2c transfer(final)",
 		})
 		if err != nil {
-			return nil, xerr.ParseRPCError(err)
+			return nil, xerror.HandleRPCError(err, "AccountMgr.C2CFinal")
 		}
 	} else {
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "version invalid")

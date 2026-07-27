@@ -65,7 +65,7 @@ require (
 	github.com/rcrowley/go-metrics v0.0.0-20250401214520-65e299d6c5c9 // indirect
 	github.com/redis/go-redis/v9 v9.19.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/starslipay/paycomm v1.0.0 // indirect
+	github.com/starslipay/paycomm v1.0.1 // indirect
 	github.com/titanous/json5 v1.0.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.21 // indirect
