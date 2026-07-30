@@ -7,4 +7,5 @@ type Config struct {
 	UserMgrRpcConfig    zrpc.RpcClientConf
 	AccountMgrRpcConfig zrpc.RpcClientConf
 	TradeIdMgrRpcConfig zrpc.RpcClientConf
+	OrderMgrRpcConfig   zrpc.RpcClientConf
 }

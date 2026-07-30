@@ -81,6 +81,32 @@ message C2BankDoRsp {
     int32 is_repeat = 3;
 }
 
+message PayPreReq {
+    string user_id = 1;
+    string merchant_id = 2;
+}
+
+message PayPreRsp {
+    string user_id = 1;
+    string transaction_id = 2;
+}
+
+message BanPayReq {
+    string transaction_id = 1;
+    string out_order_no = 2;
+    string merchant_id = 3;
+    string user_id = 4;
+    int64 amount = 5;
+    int32 verify_type = 6;
+    string password = 7;
+}
+
+message BanPayRsp {
+    string user_id = 1;
+    string transaction_id = 2;
+    string order_success_token = 3;
+}
+
 service TradeItg {
     rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
     rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
@@ -88,6 +114,8 @@ service TradeItg {
     rpc Bank2CDo(Bank2CDoReq) returns (Bank2CDoRsp);
     rpc C2BankPre(C2BankPreReq) returns (C2BankPreRsp);
     rpc C2BankDo(C2BankDoReq) returns (C2BankDoRsp);
+    rpc PayPre(PayPreReq) returns (PayPreRsp);
+    rpc BanPay(BanPayReq) returns (BanPayRsp);
 }
 
 /*

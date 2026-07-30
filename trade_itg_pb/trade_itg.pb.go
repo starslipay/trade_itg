@@ -781,6 +781,262 @@ func (x *C2BankDoRsp) GetIsRepeat() int32 {
 	return 0
 }
 
+type PayPreReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MerchantId    string                 `protobuf:"bytes,2,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayPreReq) Reset() {
+	*x = PayPreReq{}
+	mi := &file_trade_itg_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayPreReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayPreReq) ProtoMessage() {}
+
+func (x *PayPreReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayPreReq.ProtoReflect.Descriptor instead.
+func (*PayPreReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PayPreReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *PayPreReq) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+type PayPreRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TransactionId string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PayPreRsp) Reset() {
+	*x = PayPreRsp{}
+	mi := &file_trade_itg_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PayPreRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PayPreRsp) ProtoMessage() {}
+
+func (x *PayPreRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PayPreRsp.ProtoReflect.Descriptor instead.
+func (*PayPreRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *PayPreRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *PayPreRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+type BanPayReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutOrderNo    string                 `protobuf:"bytes,2,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	MerchantId    string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
+	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *BanPayReq) Reset() {
+	*x = BanPayReq{}
+	mi := &file_trade_itg_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BanPayReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BanPayReq) ProtoMessage() {}
+
+func (x *BanPayReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BanPayReq.ProtoReflect.Descriptor instead.
+func (*BanPayReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *BanPayReq) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *BanPayReq) GetOutOrderNo() string {
+	if x != nil {
+		return x.OutOrderNo
+	}
+	return ""
+}
+
+func (x *BanPayReq) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *BanPayReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *BanPayReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *BanPayReq) GetVerifyType() int32 {
+	if x != nil {
+		return x.VerifyType
+	}
+	return 0
+}
+
+func (x *BanPayReq) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type BanPayRsp struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TransactionId     string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OrderSuccessToken string                 `protobuf:"bytes,3,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *BanPayRsp) Reset() {
+	*x = BanPayRsp{}
+	mi := &file_trade_itg_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BanPayRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BanPayRsp) ProtoMessage() {}
+
+func (x *BanPayRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BanPayRsp.ProtoReflect.Descriptor instead.
+func (*BanPayRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *BanPayRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetOrderSuccessToken() string {
+	if x != nil {
+		return x.OrderSuccessToken
+	}
+	return ""
+}
+
 var File_trade_itg_proto protoreflect.FileDescriptor
 
 const file_trade_itg_proto_rawDesc = "" +
@@ -841,14 +1097,38 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\vC2BankDoRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
-	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat2\x99\x03\n" +
+	"\tis_repeat\x18\x03 \x01(\x05R\bisRepeat\"E\n" +
+	"\tPayPreReq\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1f\n" +
+	"\vmerchant_id\x18\x02 \x01(\tR\n" +
+	"merchantId\"K\n" +
+	"\tPayPreRsp\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xe3\x01\n" +
+	"\tBanPayReq\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x02 \x01(\tR\n" +
+	"outOrderNo\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x1f\n" +
+	"\vverify_type\x18\x06 \x01(\x05R\n" +
+	"verifyType\x12\x1a\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\"{\n" +
+	"\tBanPayRsp\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12.\n" +
+	"\x13order_success_token\x18\x03 \x01(\tR\x11orderSuccessToken2\x85\x04\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
 	"\tBank2CPre\x12\x17.trade_itg.Bank2CPreReq\x1a\x17.trade_itg.Bank2CPreRsp\x12:\n" +
 	"\bBank2CDo\x12\x16.trade_itg.Bank2CDoReq\x1a\x16.trade_itg.Bank2CDoRsp\x12=\n" +
 	"\tC2BankPre\x12\x17.trade_itg.C2BankPreReq\x1a\x17.trade_itg.C2BankPreRsp\x12:\n" +
-	"\bC2BankDo\x12\x16.trade_itg.C2BankDoReq\x1a\x16.trade_itg.C2BankDoRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
+	"\bC2BankDo\x12\x16.trade_itg.C2BankDoReq\x1a\x16.trade_itg.C2BankDoRsp\x124\n" +
+	"\x06PayPre\x12\x14.trade_itg.PayPreReq\x1a\x14.trade_itg.PayPreRsp\x124\n" +
+	"\x06BanPay\x12\x14.trade_itg.BanPayReq\x1a\x14.trade_itg.BanPayRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
 
 var (
 	file_trade_itg_proto_rawDescOnce sync.Once
@@ -862,7 +1142,7 @@ func file_trade_itg_proto_rawDescGZIP() []byte {
 	return file_trade_itg_proto_rawDescData
 }
 
-var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_trade_itg_proto_goTypes = []any{
 	(*C2CTransferPreReq)(nil), // 0: trade_itg.C2cTransferPreReq
 	(*C2CTransferPreRsp)(nil), // 1: trade_itg.C2cTransferPreRsp
@@ -876,6 +1156,10 @@ var file_trade_itg_proto_goTypes = []any{
 	(*C2BankPreRsp)(nil),      // 9: trade_itg.C2BankPreRsp
 	(*C2BankDoReq)(nil),       // 10: trade_itg.C2BankDoReq
 	(*C2BankDoRsp)(nil),       // 11: trade_itg.C2BankDoRsp
+	(*PayPreReq)(nil),         // 12: trade_itg.PayPreReq
+	(*PayPreRsp)(nil),         // 13: trade_itg.PayPreRsp
+	(*BanPayReq)(nil),         // 14: trade_itg.BanPayReq
+	(*BanPayRsp)(nil),         // 15: trade_itg.BanPayRsp
 }
 var file_trade_itg_proto_depIdxs = []int32{
 	0,  // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
@@ -884,14 +1168,18 @@ var file_trade_itg_proto_depIdxs = []int32{
 	6,  // 3: trade_itg.TradeItg.Bank2CDo:input_type -> trade_itg.Bank2CDoReq
 	8,  // 4: trade_itg.TradeItg.C2BankPre:input_type -> trade_itg.C2BankPreReq
 	10, // 5: trade_itg.TradeItg.C2BankDo:input_type -> trade_itg.C2BankDoReq
-	1,  // 6: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
-	3,  // 7: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
-	5,  // 8: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
-	7,  // 9: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
-	9,  // 10: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
-	11, // 11: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
+	12, // 6: trade_itg.TradeItg.PayPre:input_type -> trade_itg.PayPreReq
+	14, // 7: trade_itg.TradeItg.BanPay:input_type -> trade_itg.BanPayReq
+	1,  // 8: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
+	3,  // 9: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
+	5,  // 10: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
+	7,  // 11: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
+	9,  // 12: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
+	11, // 13: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
+	13, // 14: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
+	15, // 15: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -908,7 +1196,7 @@ func file_trade_itg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_itg_proto_rawDesc), len(file_trade_itg_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

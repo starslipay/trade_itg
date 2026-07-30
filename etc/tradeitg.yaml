@@ -38,3 +38,14 @@ TradeIdMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: tradeidmgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+
+
+OrderMgrRpcConfig:
+  Etcd:
+    Hosts:
+    - etcd:2379
+    # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
+    # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
+    # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
+    Key: ordermgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
+  Timeout: 10000  # 超时时间，单位毫秒

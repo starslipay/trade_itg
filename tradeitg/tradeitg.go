@@ -14,6 +14,8 @@ import (
 )
 
 type (
+	BanPayReq         = trade_itg_pb.BanPayReq
+	BanPayRsp         = trade_itg_pb.BanPayRsp
 	Bank2CDoReq       = trade_itg_pb.Bank2CDoReq
 	Bank2CDoRsp       = trade_itg_pb.Bank2CDoRsp
 	Bank2CPreReq      = trade_itg_pb.Bank2CPreReq
@@ -26,6 +28,8 @@ type (
 	C2CTransferDoRsp  = trade_itg_pb.C2CTransferDoRsp
 	C2CTransferPreReq = trade_itg_pb.C2CTransferPreReq
 	C2CTransferPreRsp = trade_itg_pb.C2CTransferPreRsp
+	PayPreReq         = trade_itg_pb.PayPreReq
+	PayPreRsp         = trade_itg_pb.PayPreRsp
 
 	TradeItg interface {
 		C2CTransferPre(ctx context.Context, in *C2CTransferPreReq, opts ...grpc.CallOption) (*C2CTransferPreRsp, error)
@@ -34,6 +38,8 @@ type (
 		Bank2CDo(ctx context.Context, in *Bank2CDoReq, opts ...grpc.CallOption) (*Bank2CDoRsp, error)
 		C2BankPre(ctx context.Context, in *C2BankPreReq, opts ...grpc.CallOption) (*C2BankPreRsp, error)
 		C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error)
+		PayPre(ctx context.Context, in *PayPreReq, opts ...grpc.CallOption) (*PayPreRsp, error)
+		BanPay(ctx context.Context, in *BanPayReq, opts ...grpc.CallOption) (*BanPayRsp, error)
 	}
 
 	defaultTradeItg struct {
@@ -75,4 +81,14 @@ func (m *defaultTradeItg) C2BankPre(ctx context.Context, in *C2BankPreReq, opts 
 func (m *defaultTradeItg) C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error) {
 	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
 	return client.C2BankDo(ctx, in, opts...)
+}
+
+func (m *defaultTradeItg) PayPre(ctx context.Context, in *PayPreReq, opts ...grpc.CallOption) (*PayPreRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.PayPre(ctx, in, opts...)
+}
+
+func (m *defaultTradeItg) BanPay(ctx context.Context, in *BanPayReq, opts ...grpc.CallOption) (*BanPayRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.BanPay(ctx, in, opts...)
 }

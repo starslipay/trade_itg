@@ -34,7 +34,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 		Password: in.Password,
 	})
 	if err != nil {
-		return nil, xerr.ParseRPCError(err)
+		return nil, xerror.HandleRPCError(err, "UserMgr.CheckPassword")
 	}
 
 	sellerRelationRsp, err := l.svcCtx.UserMgr.GetRelation(l.ctx, &user_mgr_pb.GetRelationReq{
@@ -42,14 +42,10 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 	})
 	if err != nil {
 		bizError, isSuccessParse := xerror.ParseBizError(err)
-		if isSuccessParse {
-			if bizError.Code == xerr.UserMgrErrCodeUserNotExist {
-				return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeSellerNotExist, "seller not exist")
-			} else {
-				return nil, xerror.NewBizError(codes.Internal, bizError.Code, bizError.Message)
-			}
+		if isSuccessParse && bizError.Code == xerr.UserMgrErrCodeUserNotExist {
+			return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeSellerNotExist, "seller not exist")
 		}
-		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeCallRpc, err.Error())
+		return nil, xerror.HandleRPCError(err, "UserMgr.GetRelation")
 	}
 
 	var c2CLocalRsp *account_mgr_pb.C2CRsp

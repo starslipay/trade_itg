@@ -52,3 +52,13 @@ func (s *TradeItgServer) C2BankDo(ctx context.Context, in *trade_itg_pb.C2BankDo
 	l := logic.NewC2BankDoLogic(ctx, s.svcCtx)
 	return l.C2BankDo(in)
 }
+
+func (s *TradeItgServer) PayPre(ctx context.Context, in *trade_itg_pb.PayPreReq) (*trade_itg_pb.PayPreRsp, error) {
+	l := logic.NewPayPreLogic(ctx, s.svcCtx)
+	return l.PayPre(in)
+}
+
+func (s *TradeItgServer) BanPay(ctx context.Context, in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRsp, error) {
+	l := logic.NewBanPayLogic(ctx, s.svcCtx)
+	return l.BanPay(in)
+}
