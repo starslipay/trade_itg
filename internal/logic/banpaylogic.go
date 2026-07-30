@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"time"
 
 	"github.com/starslipay/order_mgr/order_mgr_pb"
 	"github.com/starslipay/paycomm/xerror"
@@ -75,6 +76,7 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		UserId:        in.UserId,
 		Uid:           userRsp.Uid,
 		Amount:        in.Amount,
+		PayTime:       time.Now().Format("2006-01-02 15:04:05"),
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "OrderMgr.BanPaySuccessOrder")
