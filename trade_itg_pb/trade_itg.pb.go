@@ -982,6 +982,8 @@ type BanPayRsp struct {
 	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	TransactionId     string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
 	OrderSuccessToken string                 `protobuf:"bytes,3,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
+	PayTime           string                 `protobuf:"bytes,4,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1031,6 +1033,180 @@ func (x *BanPayRsp) GetTransactionId() string {
 }
 
 func (x *BanPayRsp) GetOrderSuccessToken() string {
+	if x != nil {
+		return x.OrderSuccessToken
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetPayTime() string {
+	if x != nil {
+		return x.PayTime
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+type CloseOrSupplyOrderReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutOrderNo    string                 `protobuf:"bytes,2,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	MerchantId    string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloseOrSupplyOrderReq) Reset() {
+	*x = CloseOrSupplyOrderReq{}
+	mi := &file_trade_itg_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloseOrSupplyOrderReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloseOrSupplyOrderReq) ProtoMessage() {}
+
+func (x *CloseOrSupplyOrderReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloseOrSupplyOrderReq.ProtoReflect.Descriptor instead.
+func (*CloseOrSupplyOrderReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *CloseOrSupplyOrderReq) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderReq) GetOutOrderNo() string {
+	if x != nil {
+		return x.OutOrderNo
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderReq) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type CloseOrSupplyOrderRsp struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId     string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	UserId            string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	TradeState        int32                  `protobuf:"varint,4,opt,name=trade_state,json=tradeState,proto3" json:"trade_state,omitempty"`
+	PayTime           string                 `protobuf:"bytes,5,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	OrderSuccessToken string                 `protobuf:"bytes,6,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *CloseOrSupplyOrderRsp) Reset() {
+	*x = CloseOrSupplyOrderRsp{}
+	mi := &file_trade_itg_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloseOrSupplyOrderRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloseOrSupplyOrderRsp) ProtoMessage() {}
+
+func (x *CloseOrSupplyOrderRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloseOrSupplyOrderRsp.ProtoReflect.Descriptor instead.
+func (*CloseOrSupplyOrderRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *CloseOrSupplyOrderRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderRsp) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderRsp) GetTradeState() int32 {
+	if x != nil {
+		return x.TradeState
+	}
+	return 0
+}
+
+func (x *CloseOrSupplyOrderRsp) GetPayTime() string {
+	if x != nil {
+		return x.PayTime
+	}
+	return ""
+}
+
+func (x *CloseOrSupplyOrderRsp) GetOrderSuccessToken() string {
 	if x != nil {
 		return x.OrderSuccessToken
 	}
@@ -1115,11 +1291,31 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x1f\n" +
 	"\vverify_type\x18\x06 \x01(\x05R\n" +
 	"verifyType\x12\x1a\n" +
-	"\bpassword\x18\a \x01(\tR\bpassword\"{\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\"\xb7\x01\n" +
 	"\tBanPayRsp\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
 	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12.\n" +
-	"\x13order_success_token\x18\x03 \x01(\tR\x11orderSuccessToken2\x85\x04\n" +
+	"\x13order_success_token\x18\x03 \x01(\tR\x11orderSuccessToken\x12\x19\n" +
+	"\bpay_time\x18\x04 \x01(\tR\apayTime\x12\x1f\n" +
+	"\vmerchant_id\x18\x05 \x01(\tR\n" +
+	"merchantId\"\xb2\x01\n" +
+	"\x15CloseOrSupplyOrderReq\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x02 \x01(\tR\n" +
+	"outOrderNo\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\xe4\x01\n" +
+	"\x15CloseOrSupplyOrderRsp\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x1f\n" +
+	"\vtrade_state\x18\x04 \x01(\x05R\n" +
+	"tradeState\x12\x19\n" +
+	"\bpay_time\x18\x05 \x01(\tR\apayTime\x12.\n" +
+	"\x13order_success_token\x18\x06 \x01(\tR\x11orderSuccessToken2\xdf\x04\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
@@ -1128,7 +1324,8 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\tC2BankPre\x12\x17.trade_itg.C2BankPreReq\x1a\x17.trade_itg.C2BankPreRsp\x12:\n" +
 	"\bC2BankDo\x12\x16.trade_itg.C2BankDoReq\x1a\x16.trade_itg.C2BankDoRsp\x124\n" +
 	"\x06PayPre\x12\x14.trade_itg.PayPreReq\x1a\x14.trade_itg.PayPreRsp\x124\n" +
-	"\x06BanPay\x12\x14.trade_itg.BanPayReq\x1a\x14.trade_itg.BanPayRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
+	"\x06BanPay\x12\x14.trade_itg.BanPayReq\x1a\x14.trade_itg.BanPayRsp\x12X\n" +
+	"\x12CloseOrSupplyOrder\x12 .trade_itg.CloseOrSupplyOrderReq\x1a .trade_itg.CloseOrSupplyOrderRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
 
 var (
 	file_trade_itg_proto_rawDescOnce sync.Once
@@ -1142,24 +1339,26 @@ func file_trade_itg_proto_rawDescGZIP() []byte {
 	return file_trade_itg_proto_rawDescData
 }
 
-var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_trade_itg_proto_goTypes = []any{
-	(*C2CTransferPreReq)(nil), // 0: trade_itg.C2cTransferPreReq
-	(*C2CTransferPreRsp)(nil), // 1: trade_itg.C2cTransferPreRsp
-	(*C2CTransferDoReq)(nil),  // 2: trade_itg.C2cTransferDoReq
-	(*C2CTransferDoRsp)(nil),  // 3: trade_itg.C2cTransferDoRsp
-	(*Bank2CPreReq)(nil),      // 4: trade_itg.Bank2CPreReq
-	(*Bank2CPreRsp)(nil),      // 5: trade_itg.Bank2CPreRsp
-	(*Bank2CDoReq)(nil),       // 6: trade_itg.Bank2CDoReq
-	(*Bank2CDoRsp)(nil),       // 7: trade_itg.Bank2CDoRsp
-	(*C2BankPreReq)(nil),      // 8: trade_itg.C2BankPreReq
-	(*C2BankPreRsp)(nil),      // 9: trade_itg.C2BankPreRsp
-	(*C2BankDoReq)(nil),       // 10: trade_itg.C2BankDoReq
-	(*C2BankDoRsp)(nil),       // 11: trade_itg.C2BankDoRsp
-	(*PayPreReq)(nil),         // 12: trade_itg.PayPreReq
-	(*PayPreRsp)(nil),         // 13: trade_itg.PayPreRsp
-	(*BanPayReq)(nil),         // 14: trade_itg.BanPayReq
-	(*BanPayRsp)(nil),         // 15: trade_itg.BanPayRsp
+	(*C2CTransferPreReq)(nil),     // 0: trade_itg.C2cTransferPreReq
+	(*C2CTransferPreRsp)(nil),     // 1: trade_itg.C2cTransferPreRsp
+	(*C2CTransferDoReq)(nil),      // 2: trade_itg.C2cTransferDoReq
+	(*C2CTransferDoRsp)(nil),      // 3: trade_itg.C2cTransferDoRsp
+	(*Bank2CPreReq)(nil),          // 4: trade_itg.Bank2CPreReq
+	(*Bank2CPreRsp)(nil),          // 5: trade_itg.Bank2CPreRsp
+	(*Bank2CDoReq)(nil),           // 6: trade_itg.Bank2CDoReq
+	(*Bank2CDoRsp)(nil),           // 7: trade_itg.Bank2CDoRsp
+	(*C2BankPreReq)(nil),          // 8: trade_itg.C2BankPreReq
+	(*C2BankPreRsp)(nil),          // 9: trade_itg.C2BankPreRsp
+	(*C2BankDoReq)(nil),           // 10: trade_itg.C2BankDoReq
+	(*C2BankDoRsp)(nil),           // 11: trade_itg.C2BankDoRsp
+	(*PayPreReq)(nil),             // 12: trade_itg.PayPreReq
+	(*PayPreRsp)(nil),             // 13: trade_itg.PayPreRsp
+	(*BanPayReq)(nil),             // 14: trade_itg.BanPayReq
+	(*BanPayRsp)(nil),             // 15: trade_itg.BanPayRsp
+	(*CloseOrSupplyOrderReq)(nil), // 16: trade_itg.CloseOrSupplyOrderReq
+	(*CloseOrSupplyOrderRsp)(nil), // 17: trade_itg.CloseOrSupplyOrderRsp
 }
 var file_trade_itg_proto_depIdxs = []int32{
 	0,  // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
@@ -1170,16 +1369,18 @@ var file_trade_itg_proto_depIdxs = []int32{
 	10, // 5: trade_itg.TradeItg.C2BankDo:input_type -> trade_itg.C2BankDoReq
 	12, // 6: trade_itg.TradeItg.PayPre:input_type -> trade_itg.PayPreReq
 	14, // 7: trade_itg.TradeItg.BanPay:input_type -> trade_itg.BanPayReq
-	1,  // 8: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
-	3,  // 9: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
-	5,  // 10: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
-	7,  // 11: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
-	9,  // 12: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
-	11, // 13: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
-	13, // 14: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
-	15, // 15: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
-	8,  // [8:16] is the sub-list for method output_type
-	0,  // [0:8] is the sub-list for method input_type
+	16, // 8: trade_itg.TradeItg.CloseOrSupplyOrder:input_type -> trade_itg.CloseOrSupplyOrderReq
+	1,  // 9: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
+	3,  // 10: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
+	5,  // 11: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
+	7,  // 12: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
+	9,  // 13: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
+	11, // 14: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
+	13, // 15: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
+	15, // 16: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
+	17, // 17: trade_itg.TradeItg.CloseOrSupplyOrder:output_type -> trade_itg.CloseOrSupplyOrderRsp
+	9,  // [9:18] is the sub-list for method output_type
+	0,  // [0:9] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -1196,7 +1397,7 @@ func file_trade_itg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_itg_proto_rawDesc), len(file_trade_itg_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

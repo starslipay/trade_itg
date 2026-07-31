@@ -19,14 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TradeItg_C2CTransferPre_FullMethodName = "/trade_itg.TradeItg/C2cTransferPre"
-	TradeItg_C2CTransferDo_FullMethodName  = "/trade_itg.TradeItg/C2cTransferDo"
-	TradeItg_Bank2CPre_FullMethodName      = "/trade_itg.TradeItg/Bank2CPre"
-	TradeItg_Bank2CDo_FullMethodName       = "/trade_itg.TradeItg/Bank2CDo"
-	TradeItg_C2BankPre_FullMethodName      = "/trade_itg.TradeItg/C2BankPre"
-	TradeItg_C2BankDo_FullMethodName       = "/trade_itg.TradeItg/C2BankDo"
-	TradeItg_PayPre_FullMethodName         = "/trade_itg.TradeItg/PayPre"
-	TradeItg_BanPay_FullMethodName         = "/trade_itg.TradeItg/BanPay"
+	TradeItg_C2CTransferPre_FullMethodName     = "/trade_itg.TradeItg/C2cTransferPre"
+	TradeItg_C2CTransferDo_FullMethodName      = "/trade_itg.TradeItg/C2cTransferDo"
+	TradeItg_Bank2CPre_FullMethodName          = "/trade_itg.TradeItg/Bank2CPre"
+	TradeItg_Bank2CDo_FullMethodName           = "/trade_itg.TradeItg/Bank2CDo"
+	TradeItg_C2BankPre_FullMethodName          = "/trade_itg.TradeItg/C2BankPre"
+	TradeItg_C2BankDo_FullMethodName           = "/trade_itg.TradeItg/C2BankDo"
+	TradeItg_PayPre_FullMethodName             = "/trade_itg.TradeItg/PayPre"
+	TradeItg_BanPay_FullMethodName             = "/trade_itg.TradeItg/BanPay"
+	TradeItg_CloseOrSupplyOrder_FullMethodName = "/trade_itg.TradeItg/CloseOrSupplyOrder"
 )
 
 // TradeItgClient is the client API for TradeItg service.
@@ -41,6 +42,7 @@ type TradeItgClient interface {
 	C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error)
 	PayPre(ctx context.Context, in *PayPreReq, opts ...grpc.CallOption) (*PayPreRsp, error)
 	BanPay(ctx context.Context, in *BanPayReq, opts ...grpc.CallOption) (*BanPayRsp, error)
+	CloseOrSupplyOrder(ctx context.Context, in *CloseOrSupplyOrderReq, opts ...grpc.CallOption) (*CloseOrSupplyOrderRsp, error)
 }
 
 type tradeItgClient struct {
@@ -131,6 +133,16 @@ func (c *tradeItgClient) BanPay(ctx context.Context, in *BanPayReq, opts ...grpc
 	return out, nil
 }
 
+func (c *tradeItgClient) CloseOrSupplyOrder(ctx context.Context, in *CloseOrSupplyOrderReq, opts ...grpc.CallOption) (*CloseOrSupplyOrderRsp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloseOrSupplyOrderRsp)
+	err := c.cc.Invoke(ctx, TradeItg_CloseOrSupplyOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TradeItgServer is the server API for TradeItg service.
 // All implementations must embed UnimplementedTradeItgServer
 // for forward compatibility.
@@ -143,6 +155,7 @@ type TradeItgServer interface {
 	C2BankDo(context.Context, *C2BankDoReq) (*C2BankDoRsp, error)
 	PayPre(context.Context, *PayPreReq) (*PayPreRsp, error)
 	BanPay(context.Context, *BanPayReq) (*BanPayRsp, error)
+	CloseOrSupplyOrder(context.Context, *CloseOrSupplyOrderReq) (*CloseOrSupplyOrderRsp, error)
 	mustEmbedUnimplementedTradeItgServer()
 }
 
@@ -176,6 +189,9 @@ func (UnimplementedTradeItgServer) PayPre(context.Context, *PayPreReq) (*PayPreR
 }
 func (UnimplementedTradeItgServer) BanPay(context.Context, *BanPayReq) (*BanPayRsp, error) {
 	return nil, status.Error(codes.Unimplemented, "method BanPay not implemented")
+}
+func (UnimplementedTradeItgServer) CloseOrSupplyOrder(context.Context, *CloseOrSupplyOrderReq) (*CloseOrSupplyOrderRsp, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloseOrSupplyOrder not implemented")
 }
 func (UnimplementedTradeItgServer) mustEmbedUnimplementedTradeItgServer() {}
 func (UnimplementedTradeItgServer) testEmbeddedByValue()                  {}
@@ -342,6 +358,24 @@ func _TradeItg_BanPay_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TradeItg_CloseOrSupplyOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloseOrSupplyOrderReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TradeItgServer).CloseOrSupplyOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TradeItg_CloseOrSupplyOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TradeItgServer).CloseOrSupplyOrder(ctx, req.(*CloseOrSupplyOrderReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TradeItg_ServiceDesc is the grpc.ServiceDesc for TradeItg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +414,10 @@ var TradeItg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BanPay",
 			Handler:    _TradeItg_BanPay_Handler,
+		},
+		{
+			MethodName: "CloseOrSupplyOrder",
+			Handler:    _TradeItg_CloseOrSupplyOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

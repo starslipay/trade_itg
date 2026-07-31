@@ -62,3 +62,8 @@ func (s *TradeItgServer) BanPay(ctx context.Context, in *trade_itg_pb.BanPayReq)
 	l := logic.NewBanPayLogic(ctx, s.svcCtx)
 	return l.BanPay(in)
 }
+
+func (s *TradeItgServer) CloseOrSupplyOrder(ctx context.Context, in *trade_itg_pb.CloseOrSupplyOrderReq) (*trade_itg_pb.CloseOrSupplyOrderRsp, error) {
+	l := logic.NewCloseOrSupplyOrderLogic(ctx, s.svcCtx)
+	return l.CloseOrSupplyOrder(in)
+}

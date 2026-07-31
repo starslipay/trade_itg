@@ -105,6 +105,25 @@ message BanPayRsp {
     string user_id = 1;
     string transaction_id = 2;
     string order_success_token = 3;
+    string pay_time = 4;
+    string merchant_id = 5;
+}
+
+message CloseOrSupplyOrderReq {
+    string transaction_id = 1;
+    string out_order_no = 2;
+    string merchant_id = 3;
+    string user_id = 4;
+    int64 amount = 5;
+}
+
+message CloseOrSupplyOrderRsp {
+    string transaction_id = 1;
+    string user_id = 2;
+    string merchant_id = 3;
+    int32 trade_state = 4;
+    string pay_time = 5;
+    string order_success_token = 6;
 }
 
 service TradeItg {
@@ -114,8 +133,10 @@ service TradeItg {
     rpc Bank2CDo(Bank2CDoReq) returns (Bank2CDoRsp);
     rpc C2BankPre(C2BankPreReq) returns (C2BankPreRsp);
     rpc C2BankDo(C2BankDoReq) returns (C2BankDoRsp);
+
     rpc PayPre(PayPreReq) returns (PayPreRsp);
     rpc BanPay(BanPayReq) returns (BanPayRsp);
+    rpc CloseOrSupplyOrder(CloseOrSupplyOrderReq) returns (CloseOrSupplyOrderRsp);
 }
 
 /*

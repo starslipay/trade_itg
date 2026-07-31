@@ -14,22 +14,24 @@ import (
 )
 
 type (
-	BanPayReq         = trade_itg_pb.BanPayReq
-	BanPayRsp         = trade_itg_pb.BanPayRsp
-	Bank2CDoReq       = trade_itg_pb.Bank2CDoReq
-	Bank2CDoRsp       = trade_itg_pb.Bank2CDoRsp
-	Bank2CPreReq      = trade_itg_pb.Bank2CPreReq
-	Bank2CPreRsp      = trade_itg_pb.Bank2CPreRsp
-	C2BankDoReq       = trade_itg_pb.C2BankDoReq
-	C2BankDoRsp       = trade_itg_pb.C2BankDoRsp
-	C2BankPreReq      = trade_itg_pb.C2BankPreReq
-	C2BankPreRsp      = trade_itg_pb.C2BankPreRsp
-	C2CTransferDoReq  = trade_itg_pb.C2CTransferDoReq
-	C2CTransferDoRsp  = trade_itg_pb.C2CTransferDoRsp
-	C2CTransferPreReq = trade_itg_pb.C2CTransferPreReq
-	C2CTransferPreRsp = trade_itg_pb.C2CTransferPreRsp
-	PayPreReq         = trade_itg_pb.PayPreReq
-	PayPreRsp         = trade_itg_pb.PayPreRsp
+	BanPayReq             = trade_itg_pb.BanPayReq
+	BanPayRsp             = trade_itg_pb.BanPayRsp
+	Bank2CDoReq           = trade_itg_pb.Bank2CDoReq
+	Bank2CDoRsp           = trade_itg_pb.Bank2CDoRsp
+	Bank2CPreReq          = trade_itg_pb.Bank2CPreReq
+	Bank2CPreRsp          = trade_itg_pb.Bank2CPreRsp
+	C2BankDoReq           = trade_itg_pb.C2BankDoReq
+	C2BankDoRsp           = trade_itg_pb.C2BankDoRsp
+	C2BankPreReq          = trade_itg_pb.C2BankPreReq
+	C2BankPreRsp          = trade_itg_pb.C2BankPreRsp
+	C2CTransferDoReq      = trade_itg_pb.C2CTransferDoReq
+	C2CTransferDoRsp      = trade_itg_pb.C2CTransferDoRsp
+	C2CTransferPreReq     = trade_itg_pb.C2CTransferPreReq
+	C2CTransferPreRsp     = trade_itg_pb.C2CTransferPreRsp
+	CloseOrSupplyOrderReq = trade_itg_pb.CloseOrSupplyOrderReq
+	CloseOrSupplyOrderRsp = trade_itg_pb.CloseOrSupplyOrderRsp
+	PayPreReq             = trade_itg_pb.PayPreReq
+	PayPreRsp             = trade_itg_pb.PayPreRsp
 
 	TradeItg interface {
 		C2CTransferPre(ctx context.Context, in *C2CTransferPreReq, opts ...grpc.CallOption) (*C2CTransferPreRsp, error)
@@ -40,6 +42,7 @@ type (
 		C2BankDo(ctx context.Context, in *C2BankDoReq, opts ...grpc.CallOption) (*C2BankDoRsp, error)
 		PayPre(ctx context.Context, in *PayPreReq, opts ...grpc.CallOption) (*PayPreRsp, error)
 		BanPay(ctx context.Context, in *BanPayReq, opts ...grpc.CallOption) (*BanPayRsp, error)
+		CloseOrSupplyOrder(ctx context.Context, in *CloseOrSupplyOrderReq, opts ...grpc.CallOption) (*CloseOrSupplyOrderRsp, error)
 	}
 
 	defaultTradeItg struct {
@@ -91,4 +94,9 @@ func (m *defaultTradeItg) PayPre(ctx context.Context, in *PayPreReq, opts ...grp
 func (m *defaultTradeItg) BanPay(ctx context.Context, in *BanPayReq, opts ...grpc.CallOption) (*BanPayRsp, error) {
 	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
 	return client.BanPay(ctx, in, opts...)
+}
+
+func (m *defaultTradeItg) CloseOrSupplyOrder(ctx context.Context, in *CloseOrSupplyOrderReq, opts ...grpc.CallOption) (*CloseOrSupplyOrderRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.CloseOrSupplyOrder(ctx, in, opts...)
 }
