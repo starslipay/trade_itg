@@ -2,8 +2,8 @@ package logic
 
 import (
 	"context"
-	"time"
 
+	"github.com/starslipay/account_mgr/account_mgr_pb"
 	"github.com/starslipay/order_mgr/order_mgr_pb"
 	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_itg/internal/svc"
@@ -65,7 +65,18 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeReqAndRspUnMatch, "orderPreRsp.TransactionId != in.TransactionId")
 	}
 
-	// TODO 扣款
+	c2BRsp, err := l.svcCtx.AccountMgr.C2BFinal(l.ctx, &account_mgr_pb.C2BReq{
+		TransactionId: in.TransactionId,
+		Uid:           userRsp.Uid,
+		UserId:        in.UserId,
+		MerchantUid:   merchantRsp.MerchantUid,
+		MerchantId:    in.MerchantId,
+		Amount:        in.Amount,
+		CurType:       1,
+	})
+	if err != nil {
+		return nil, xerror.HandleRPCError(err, "AccountMgr.C2BFinal")
+	}
 
 	// 订单更新成功
 	orderSuccessRsp, err := l.svcCtx.OrderMgr.BanPaySuccessOrder(l.ctx, &order_mgr_pb.BanPaySuccessOrderReq{
@@ -76,7 +87,8 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		UserId:        in.UserId,
 		Uid:           userRsp.Uid,
 		Amount:        in.Amount,
-		PayTime:       time.Now().Format("2006-01-02 15:04:05"),
+		PayTime:       c2BRsp.PayTime,
+		DeductToken:   "", // TODO 待传
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "OrderMgr.BanPaySuccessOrder")
