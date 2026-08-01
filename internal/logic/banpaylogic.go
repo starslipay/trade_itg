@@ -102,8 +102,12 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 	// TODO 校验订单成功签名
 
 	return &trade_itg_pb.BanPayRsp{
-		UserId:            orderSuccessRsp.OrderInfo.UserId,
 		TransactionId:     orderSuccessRsp.OrderInfo.TransactionId,
+		OutOrderNo:        orderSuccessRsp.OrderInfo.OutOrderNo,
+		UserId:            orderSuccessRsp.OrderInfo.UserId,
+		MerchantId:        orderSuccessRsp.OrderInfo.MerchantId,
+		Amount:            orderSuccessRsp.OrderInfo.Amount,
+		PayTime:           orderSuccessRsp.OrderInfo.PayTime,
 		OrderSuccessToken: orderSuccessRsp.OrderInfo.OrderSuccessToken,
 	}, nil
 }

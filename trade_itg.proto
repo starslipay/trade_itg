@@ -102,11 +102,13 @@ message BanPayReq {
 }
 
 message BanPayRsp {
-    string user_id = 1;
-    string transaction_id = 2;
-    string order_success_token = 3;
-    string pay_time = 4;
-    string merchant_id = 5;
+    string transaction_id = 1;
+    string out_order_no = 2;
+    string user_id = 3;
+    string merchant_id = 4;
+    int64 amount = 5;
+    string pay_time = 6;
+    string order_success_token = 7;
 }
 
 message CloseOrSupplyOrderReq {

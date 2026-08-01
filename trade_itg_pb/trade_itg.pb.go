@@ -979,11 +979,13 @@ func (x *BanPayReq) GetPassword() string {
 
 type BanPayRsp struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	UserId            string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	TransactionId     string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	OrderSuccessToken string                 `protobuf:"bytes,3,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
-	PayTime           string                 `protobuf:"bytes,4,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
-	MerchantId        string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	TransactionId     string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutOrderNo        string                 `protobuf:"bytes,2,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	UserId            string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	Amount            int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	PayTime           string                 `protobuf:"bytes,6,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	OrderSuccessToken string                 `protobuf:"bytes,7,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1018,13 +1020,6 @@ func (*BanPayRsp) Descriptor() ([]byte, []int) {
 	return file_trade_itg_proto_rawDescGZIP(), []int{15}
 }
 
-func (x *BanPayRsp) GetUserId() string {
-	if x != nil {
-		return x.UserId
-	}
-	return ""
-}
-
 func (x *BanPayRsp) GetTransactionId() string {
 	if x != nil {
 		return x.TransactionId
@@ -1032,11 +1027,32 @@ func (x *BanPayRsp) GetTransactionId() string {
 	return ""
 }
 
-func (x *BanPayRsp) GetOrderSuccessToken() string {
+func (x *BanPayRsp) GetOutOrderNo() string {
 	if x != nil {
-		return x.OrderSuccessToken
+		return x.OutOrderNo
 	}
 	return ""
+}
+
+func (x *BanPayRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *BanPayRsp) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
 }
 
 func (x *BanPayRsp) GetPayTime() string {
@@ -1046,9 +1062,9 @@ func (x *BanPayRsp) GetPayTime() string {
 	return ""
 }
 
-func (x *BanPayRsp) GetMerchantId() string {
+func (x *BanPayRsp) GetOrderSuccessToken() string {
 	if x != nil {
-		return x.MerchantId
+		return x.OrderSuccessToken
 	}
 	return ""
 }
@@ -1299,14 +1315,17 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x1f\n" +
 	"\vverify_type\x18\x06 \x01(\x05R\n" +
 	"verifyType\x12\x1a\n" +
-	"\bpassword\x18\a \x01(\tR\bpassword\"\xb7\x01\n" +
-	"\tBanPayRsp\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12.\n" +
-	"\x13order_success_token\x18\x03 \x01(\tR\x11orderSuccessToken\x12\x19\n" +
-	"\bpay_time\x18\x04 \x01(\tR\apayTime\x12\x1f\n" +
-	"\vmerchant_id\x18\x05 \x01(\tR\n" +
-	"merchantId\"\xb2\x01\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\"\xf1\x01\n" +
+	"\tBanPayRsp\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x02 \x01(\tR\n" +
+	"outOrderNo\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1f\n" +
+	"\vmerchant_id\x18\x04 \x01(\tR\n" +
+	"merchantId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x19\n" +
+	"\bpay_time\x18\x06 \x01(\tR\apayTime\x12.\n" +
+	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken\"\xb2\x01\n" +
 	"\x15CloseOrSupplyOrderReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
 	"\fout_order_no\x18\x02 \x01(\tR\n" +
