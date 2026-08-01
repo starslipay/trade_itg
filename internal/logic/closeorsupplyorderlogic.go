@@ -99,6 +99,7 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 					OutOrderNo:        orderSuccessRsp.OrderInfo.OutOrderNo,
 					UserId:            orderSuccessRsp.OrderInfo.UserId,
 					MerchantId:        orderSuccessRsp.OrderInfo.MerchantId,
+					Amount:            orderSuccessRsp.OrderInfo.Amount,
 					PayTime:           orderSuccessRsp.OrderInfo.PayTime,
 					OrderSuccessToken: orderSuccessRsp.OrderInfo.OrderSuccessToken,
 				}, nil
@@ -145,6 +146,7 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 			OutOrderNo:        queryOrderRsp.OrderInfo.OutOrderNo,
 			UserId:            queryOrderRsp.OrderInfo.UserId,
 			MerchantId:        queryOrderRsp.OrderInfo.MerchantId,
+			Amount:            queryOrderRsp.OrderInfo.Amount,
 			PayTime:           queryOrderRsp.OrderInfo.PayTime,
 			OrderSuccessToken: queryOrderRsp.OrderInfo.OrderSuccessToken,
 		}, nil

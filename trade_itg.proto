@@ -125,8 +125,9 @@ message CloseOrSupplyOrderRsp {
     string out_order_no = 3;
     string user_id = 4;
     string merchant_id = 5;
-    string pay_time = 6;
-    string order_success_token = 7;
+    int64 amount = 6;
+    string pay_time = 7;
+    string order_success_token = 8;
 }
 
 service TradeItg {

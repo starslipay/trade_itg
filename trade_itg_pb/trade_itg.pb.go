@@ -1152,8 +1152,9 @@ type CloseOrSupplyOrderRsp struct {
 	OutOrderNo        string                 `protobuf:"bytes,3,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
 	UserId            string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	MerchantId        string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	PayTime           string                 `protobuf:"bytes,6,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
-	OrderSuccessToken string                 `protobuf:"bytes,7,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
+	Amount            int64                  `protobuf:"varint,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	PayTime           string                 `protobuf:"bytes,7,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	OrderSuccessToken string                 `protobuf:"bytes,8,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1221,6 +1222,13 @@ func (x *CloseOrSupplyOrderRsp) GetMerchantId() string {
 		return x.MerchantId
 	}
 	return ""
+}
+
+func (x *CloseOrSupplyOrderRsp) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
 }
 
 func (x *CloseOrSupplyOrderRsp) GetPayTime() string {
@@ -1333,7 +1341,7 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\vmerchant_id\x18\x03 \x01(\tR\n" +
 	"merchantId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\x86\x02\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\x9e\x02\n" +
 	"\x15CloseOrSupplyOrderRsp\x12\x1f\n" +
 	"\vresult_code\x18\x01 \x01(\x05R\n" +
 	"resultCode\x12%\n" +
@@ -1342,9 +1350,10 @@ const file_trade_itg_proto_rawDesc = "" +
 	"outOrderNo\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1f\n" +
 	"\vmerchant_id\x18\x05 \x01(\tR\n" +
-	"merchantId\x12\x19\n" +
-	"\bpay_time\x18\x06 \x01(\tR\apayTime\x12.\n" +
-	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken2\xdf\x04\n" +
+	"merchantId\x12\x16\n" +
+	"\x06amount\x18\x06 \x01(\x03R\x06amount\x12\x19\n" +
+	"\bpay_time\x18\a \x01(\tR\apayTime\x12.\n" +
+	"\x13order_success_token\x18\b \x01(\tR\x11orderSuccessToken2\xdf\x04\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
