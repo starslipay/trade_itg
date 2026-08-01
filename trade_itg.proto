@@ -122,9 +122,9 @@ message CloseOrSupplyOrderReq {
 message CloseOrSupplyOrderRsp {
     int32 result_code = 1;
     string transaction_id = 2;
-    string user_id = 3;
-    string merchant_id = 4;
-    int32 trade_state = 5;
+    string out_order_no = 3;
+    string user_id = 4;
+    string merchant_id = 5;
     string pay_time = 6;
     string order_success_token = 7;
 }

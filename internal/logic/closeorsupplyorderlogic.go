@@ -96,9 +96,9 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 				return &trade_itg_pb.CloseOrSupplyOrderRsp{
 					ResultCode:        ResultCodeOrderSuccess,
 					TransactionId:     in.TransactionId,
+					OutOrderNo:        orderSuccessRsp.OrderInfo.OutOrderNo,
 					UserId:            orderSuccessRsp.OrderInfo.UserId,
 					MerchantId:        orderSuccessRsp.OrderInfo.MerchantId,
-					TradeState:        orderSuccessRsp.OrderInfo.TradeState,
 					PayTime:           orderSuccessRsp.OrderInfo.PayTime,
 					OrderSuccessToken: orderSuccessRsp.OrderInfo.OrderSuccessToken,
 				}, nil
@@ -134,17 +134,17 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 
 			return &trade_itg_pb.CloseOrSupplyOrderRsp{
 				ResultCode:    ResultCodeOrderClosed,
-				TransactionId: in.TransactionId,
+				TransactionId: queryOrderRsp.OrderInfo.TransactionId,
 			}, nil
 		}
 	case consts.OrderTradeStateSuccess:
 		// TODO 校验关键数据一致性
 		return &trade_itg_pb.CloseOrSupplyOrderRsp{
 			ResultCode:        ResultCodeOrderSuccess,
-			TransactionId:     in.TransactionId,
+			TransactionId:     queryOrderRsp.OrderInfo.TransactionId,
+			OutOrderNo:        queryOrderRsp.OrderInfo.OutOrderNo,
 			UserId:            queryOrderRsp.OrderInfo.UserId,
 			MerchantId:        queryOrderRsp.OrderInfo.MerchantId,
-			TradeState:        queryOrderRsp.OrderInfo.TradeState,
 			PayTime:           queryOrderRsp.OrderInfo.PayTime,
 			OrderSuccessToken: queryOrderRsp.OrderInfo.OrderSuccessToken,
 		}, nil

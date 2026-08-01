@@ -1149,9 +1149,9 @@ type CloseOrSupplyOrderRsp struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	ResultCode        int32                  `protobuf:"varint,1,opt,name=result_code,json=resultCode,proto3" json:"result_code,omitempty"`
 	TransactionId     string                 `protobuf:"bytes,2,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
-	UserId            string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	MerchantId        string                 `protobuf:"bytes,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	TradeState        int32                  `protobuf:"varint,5,opt,name=trade_state,json=tradeState,proto3" json:"trade_state,omitempty"`
+	OutOrderNo        string                 `protobuf:"bytes,3,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	UserId            string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
 	PayTime           string                 `protobuf:"bytes,6,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
 	OrderSuccessToken string                 `protobuf:"bytes,7,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
 	unknownFields     protoimpl.UnknownFields
@@ -1202,6 +1202,13 @@ func (x *CloseOrSupplyOrderRsp) GetTransactionId() string {
 	return ""
 }
 
+func (x *CloseOrSupplyOrderRsp) GetOutOrderNo() string {
+	if x != nil {
+		return x.OutOrderNo
+	}
+	return ""
+}
+
 func (x *CloseOrSupplyOrderRsp) GetUserId() string {
 	if x != nil {
 		return x.UserId
@@ -1214,13 +1221,6 @@ func (x *CloseOrSupplyOrderRsp) GetMerchantId() string {
 		return x.MerchantId
 	}
 	return ""
-}
-
-func (x *CloseOrSupplyOrderRsp) GetTradeState() int32 {
-	if x != nil {
-		return x.TradeState
-	}
-	return 0
 }
 
 func (x *CloseOrSupplyOrderRsp) GetPayTime() string {
@@ -1333,16 +1333,16 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\vmerchant_id\x18\x03 \x01(\tR\n" +
 	"merchantId\x12\x17\n" +
 	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
-	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\x85\x02\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\x86\x02\n" +
 	"\x15CloseOrSupplyOrderRsp\x12\x1f\n" +
 	"\vresult_code\x18\x01 \x01(\x05R\n" +
 	"resultCode\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12\x17\n" +
-	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1f\n" +
-	"\vmerchant_id\x18\x04 \x01(\tR\n" +
-	"merchantId\x12\x1f\n" +
-	"\vtrade_state\x18\x05 \x01(\x05R\n" +
-	"tradeState\x12\x19\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x03 \x01(\tR\n" +
+	"outOrderNo\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x1f\n" +
+	"\vmerchant_id\x18\x05 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
 	"\bpay_time\x18\x06 \x01(\tR\apayTime\x12.\n" +
 	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken2\xdf\x04\n" +
 	"\bTradeItg\x12L\n" +
