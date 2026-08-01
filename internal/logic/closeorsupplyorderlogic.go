@@ -16,6 +16,11 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+const (
+	ResultCodeOrderSuccess = 1
+	ResultCodeOrderClosed  = 2
+)
+
 type CloseOrSupplyOrderLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -39,7 +44,7 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 		return nil, xerror.HandleRPCError(err, "UserMgr.GetMerchantInfo")
 	}
 
-	// 查询用户信息 并校验密码
+	// 查询用户信息
 	userRsp, err := l.svcCtx.UserMgr.GetUserInfo(l.ctx, &user_mgr_pb.GetUserInfoReq{
 		UserId: in.UserId,
 	})
@@ -89,6 +94,7 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 					return nil, xerror.HandleRPCError(err, "OrderMgr.BanPaySuccessOrder")
 				}
 				return &trade_itg_pb.CloseOrSupplyOrderRsp{
+					ResultCode:        ResultCodeOrderSuccess,
 					TransactionId:     in.TransactionId,
 					UserId:            orderSuccessRsp.OrderInfo.UserId,
 					MerchantId:        orderSuccessRsp.OrderInfo.MerchantId,
@@ -98,29 +104,43 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 				}, nil
 			} else if queryC2BBillRsp.State == consts.C2BBillStateClose {
 				// 如果c2b bill状态为关单，更新订单状态为关单
-				orderCloseRsp, err := l.svcCtx.OrderMgr.CloseOrder(l.ctx, &order_mgr_pb.CloseOrderReq{
+				_, err := l.svcCtx.OrderMgr.CloseOrder(l.ctx, &order_mgr_pb.CloseOrderReq{
 					TransactionId: in.TransactionId,
 				})
 				if err != nil {
 					return nil, xerror.HandleRPCError(err, "OrderMgr.CloseOrder")
 				}
-				_ = orderCloseRsp
 
+				// TODO 校验关键数据一致性
+				return &trade_itg_pb.CloseOrSupplyOrderRsp{
+					ResultCode:    ResultCodeOrderClosed,
+					TransactionId: in.TransactionId,
+				}, nil
+			} else {
+				return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "c2b bill state is not init")
 			}
 		} else {
+			// TODO 先关c2b bill
+
 			// 如果c2b bill不存在，更新订单状态为关单，同时更新c2b bill状态为关单
-			orderCloseRsp, err := l.svcCtx.OrderMgr.CloseOrder(l.ctx, &order_mgr_pb.CloseOrderReq{
+			_, err := l.svcCtx.OrderMgr.CloseOrder(l.ctx, &order_mgr_pb.CloseOrderReq{
 				TransactionId: in.TransactionId,
 			})
 			if err != nil {
 				return nil, xerror.HandleRPCError(err, "OrderMgr.BanPayCloseOrder")
 			}
-			_ = orderCloseRsp
 
-			// TODO 关闭c2b bill
+			// TODO 校验关键数据一致性
+
+			return &trade_itg_pb.CloseOrSupplyOrderRsp{
+				ResultCode:    ResultCodeOrderClosed,
+				TransactionId: in.TransactionId,
+			}, nil
 		}
 	case consts.OrderTradeStateSuccess:
+		// TODO 校验关键数据一致性
 		return &trade_itg_pb.CloseOrSupplyOrderRsp{
+			ResultCode:        ResultCodeOrderSuccess,
 			TransactionId:     in.TransactionId,
 			UserId:            queryOrderRsp.OrderInfo.UserId,
 			MerchantId:        queryOrderRsp.OrderInfo.MerchantId,
@@ -130,15 +150,10 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 		}, nil
 	case consts.OrderTradeStateClose:
 		return &trade_itg_pb.CloseOrSupplyOrderRsp{
+			ResultCode:    ResultCodeOrderClosed,
 			TransactionId: in.TransactionId,
-			UserId:        queryOrderRsp.OrderInfo.UserId,
-			MerchantId:    queryOrderRsp.OrderInfo.MerchantId,
-			TradeState:    queryOrderRsp.OrderInfo.TradeState,
-			PayTime:       queryOrderRsp.OrderInfo.PayTime,
 		}, nil
 	default:
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "order trade state is not init")
 	}
-
-	return &trade_itg_pb.CloseOrSupplyOrderRsp{}, nil
 }

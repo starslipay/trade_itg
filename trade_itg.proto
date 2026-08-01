@@ -118,12 +118,13 @@ message CloseOrSupplyOrderReq {
 }
 
 message CloseOrSupplyOrderRsp {
-    string transaction_id = 1;
-    string user_id = 2;
-    string merchant_id = 3;
-    int32 trade_state = 4;
-    string pay_time = 5;
-    string order_success_token = 6;
+    int32 result_code = 1;
+    string transaction_id = 2;
+    string user_id = 3;
+    string merchant_id = 4;
+    int32 trade_state = 5;
+    string pay_time = 6;
+    string order_success_token = 7;
 }
 
 service TradeItg {
