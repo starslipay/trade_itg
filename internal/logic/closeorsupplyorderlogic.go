@@ -67,13 +67,11 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 		})
 		if err != nil {
 			BizError, isSuccessParse := xerror.ParseBizError(err)
-			if isSuccessParse {
-				// c2b bill不存在
-				if BizError.Code == 300001009 {
-					isExistC2BBill = false
-				}
+			if isSuccessParse && BizError.Code == 300001009 {
+				isExistC2BBill = false
+			} else {
+				return nil, xerror.HandleRPCError(err, "AccountMgr.QueryC2BBill")
 			}
-			return nil, xerror.HandleRPCError(err, "AccountMgr.QueryC2BBill")
 		}
 
 		if isExistC2BBill {
