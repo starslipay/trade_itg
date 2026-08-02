@@ -8,6 +8,7 @@ import (
 	"github.com/starslipay/paycomm/xerror"
 	"github.com/starslipay/trade_itg/internal/consts"
 	"github.com/starslipay/trade_itg/internal/svc"
+	"github.com/starslipay/trade_itg/internal/util"
 	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
 	"github.com/starslipay/user_mgr/user_mgr_pb"
@@ -177,6 +178,7 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 		return nil, err
 	}
 
+	// 根据订单状态处理不同逻辑
 	switch queryOrderRsp.OrderInfo.TradeState {
 	case consts.OrderTradeStateInit:
 		// 查询c2b bill
@@ -233,7 +235,11 @@ func (l *CloseOrSupplyOrderLogic) CloseOrSupplyOrder(in *trade_itg_pb.CloseOrSup
 			}, nil
 		}
 	case consts.OrderTradeStateSuccess:
-		// TODO 校验关键数据一致性
+		// 校验订单成功token
+		if err := util.CheckOrderSuccessToken(in.TransactionId, in.OutOrderNo,
+			merchantRsp.MerchantUid, userRsp.Uid, in.Amount, queryOrderRsp.OrderInfo.OrderSuccessToken); err != nil {
+			return nil, err
+		}
 
 		return &trade_itg_pb.CloseOrSupplyOrderRsp{
 			ResultCode:        ResultCodeOrderSuccess,

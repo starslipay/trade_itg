@@ -48,18 +48,18 @@ func (l *C2cTransferDoLogic) checkInputParams(in *trade_itg_pb.C2CTransferDoReq)
 }
 
 func (l *C2cTransferDoLogic) checkBuyerPassword(in *trade_itg_pb.C2CTransferDoReq) (*user_mgr_pb.CheckPasswordRsp, error) {
-	checkPasswordRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+	userRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
 		UserId:   in.BuyerUserId,
 		Password: in.Password,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "UserMgr.CheckPassword")
 	}
-	if checkPasswordRsp.UserId != in.BuyerUserId {
+	if userRsp.UserId != in.BuyerUserId {
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeReqAndRspUnMatch, "buyer userId not match")
 	}
 
-	return checkPasswordRsp, nil
+	return userRsp, nil
 }
 
 func (l *C2cTransferDoLogic) getSellerRelation(in *trade_itg_pb.C2CTransferDoReq) (*user_mgr_pb.GetRelationRsp, error) {
@@ -129,7 +129,7 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 	}
 
 	// 校验密码 & 校验买家是否存在 & 查询买家Uid
-	checkPasswordRsp, err := l.checkBuyerPassword(in)
+	userRsp, err := l.checkBuyerPassword(in)
 	if err != nil {
 		return nil, err
 	}
@@ -143,13 +143,13 @@ func (l *C2cTransferDoLogic) C2CTransferDo(in *trade_itg_pb.C2CTransferDoReq) (*
 	var c2CRsp *account_mgr_pb.C2CRsp
 	if 0 == in.Version {
 		// c2c同步入账(c出和c入必须在同一个实例中)
-		c2CRsp, err = l.c2CLocal(in, checkPasswordRsp, sellerRelationRsp)
+		c2CRsp, err = l.c2CLocal(in, userRsp, sellerRelationRsp)
 		if err != nil {
 			return nil, err
 		}
 	} else if 1 == in.Version {
 		// c2c异步入账(c出和c入允许在不同的实例中)
-		c2CRsp, err = l.c2CFinal(in, checkPasswordRsp, sellerRelationRsp)
+		c2CRsp, err = l.c2CFinal(in, userRsp, sellerRelationRsp)
 		if err != nil {
 			return nil, err
 		}

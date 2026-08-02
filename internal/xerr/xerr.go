@@ -13,9 +13,10 @@ var (
 	ErrCodeSystem = ModuleErrorBase + 0
 
 	// 业务错误码 1000-1999
-	ErrCodeSellerNotExist   = ModuleErrorBase + 1000 // 卖方不存在
-	ErrCodeParams           = ModuleErrorBase + 1001 // 参数错误
-	ErrCodeReqAndRspUnMatch = ModuleErrorBase + 1002 // 请求参数和响应参数不匹配
+	ErrCodeSellerNotExist         = ModuleErrorBase + 1000 // 卖方不存在
+	ErrCodeParams                 = ModuleErrorBase + 1001 // 参数错误
+	ErrCodeReqAndRspUnMatch       = ModuleErrorBase + 1002 // 请求参数和响应参数不匹配
+	ErrCodeCheckOrderSuccessToken = ModuleErrorBase + 1003 // 订单成功token校验失败
 )
 
 var (

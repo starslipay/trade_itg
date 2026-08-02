@@ -50,11 +50,11 @@ func (l *C2BankDoLogic) checkInputParams(in *trade_itg_pb.C2BankDoReq) error {
 	return nil
 }
 
-func (l *C2BankDoLogic) C2Bank(in *trade_itg_pb.C2BankDoReq, checkPasswordRsp *user_mgr_pb.CheckPasswordRsp) (*account_mgr_pb.C2BankRsp, error) {
+func (l *C2BankDoLogic) C2Bank(in *trade_itg_pb.C2BankDoReq, userRsp *user_mgr_pb.CheckPasswordRsp) (*account_mgr_pb.C2BankRsp, error) {
 	c2BankRsp, err := l.svcCtx.AccountMgr.C2Bank(l.ctx, &account_mgr_pb.C2BankReq{
 		TransactionId: in.TransactionId,
 		UserId:        in.UserId,
-		Uid:           checkPasswordRsp.Uid,
+		Uid:           userRsp.Uid,
 		BankType:      in.BankType,
 		Amount:        in.Amount,
 		CurType:       1,
@@ -67,18 +67,18 @@ func (l *C2BankDoLogic) C2Bank(in *trade_itg_pb.C2BankDoReq, checkPasswordRsp *u
 }
 
 func (l *C2BankDoLogic) checkPassword(in *trade_itg_pb.C2BankDoReq) (*user_mgr_pb.CheckPasswordRsp, error) {
-	checkPasswordRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
+	userRsp, err := l.svcCtx.UserMgr.CheckPassword(l.ctx, &user_mgr_pb.CheckPasswordReq{
 		UserId:   in.UserId,
 		Password: in.Password,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "UserMgr.CheckPassword")
 	}
-	if checkPasswordRsp.UserId != in.UserId {
+	if userRsp.UserId != in.UserId {
 		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "UserId not match")
 	}
 
-	return checkPasswordRsp, nil
+	return userRsp, nil
 }
 
 func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2BankDoRsp, error) {
@@ -88,13 +88,13 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 	}
 
 	// 校验密码
-	checkPasswordRsp, err := l.checkPassword(in)
+	userRsp, err := l.checkPassword(in)
 	if err != nil {
 		return nil, err
 	}
 
 	// 调用C2Bank
-	c2BankRsp, err := l.C2Bank(in, checkPasswordRsp)
+	c2BankRsp, err := l.C2Bank(in, userRsp)
 	if err != nil {
 		return nil, err
 	}
