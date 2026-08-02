@@ -88,7 +88,7 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		Uid:           userRsp.Uid,
 		Amount:        in.Amount,
 		PayTime:       c2BRsp.PayTime,
-		DeductToken:   "", // TODO 待传
+		DeductToken:   c2BRsp.DeductToken,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "OrderMgr.BanPaySuccessOrder")

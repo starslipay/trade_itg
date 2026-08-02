@@ -3,7 +3,7 @@ module github.com/starslipay/trade_itg
 go 1.25.4
 
 require (
-	github.com/starslipay/account_mgr v1.1.1
+	github.com/starslipay/account_mgr v1.1.3
 	github.com/starslipay/trade_id_mgr v1.0.0
 	github.com/starslipay/user_mgr v1.0.6
 	github.com/zeromicro/go-zero v1.10.2

@@ -180,6 +180,10 @@ github.com/starslipay/account_mgr v1.1.0 h1:90hg8bUxcNIWNpKGLBQZUeXofHhLetKHvPwt
 github.com/starslipay/account_mgr v1.1.0/go.mod h1:KaWJzNLnDVh+aymOt9XkRBxfEJJPgS0ofQC4/r+fdkg=
 github.com/starslipay/account_mgr v1.1.1 h1:1tCi5fmENPMBqizKFEVdarB7hUjBBhilSqMWjCmHjjk=
 github.com/starslipay/account_mgr v1.1.1/go.mod h1:KaWJzNLnDVh+aymOt9XkRBxfEJJPgS0ofQC4/r+fdkg=
+github.com/starslipay/account_mgr v1.1.2 h1:eJS6p3z+mvVYAafFh+FwvXeLkbajIHOnalrVPupeEos=
+github.com/starslipay/account_mgr v1.1.2/go.mod h1:KaWJzNLnDVh+aymOt9XkRBxfEJJPgS0ofQC4/r+fdkg=
+github.com/starslipay/account_mgr v1.1.3 h1:GZlMLuBRM/QW9xS96xW9wS/87+KoH3Q/dEbQtukLreo=
+github.com/starslipay/account_mgr v1.1.3/go.mod h1:KaWJzNLnDVh+aymOt9XkRBxfEJJPgS0ofQC4/r+fdkg=
 github.com/starslipay/order_mgr v1.0.0 h1:W/udfSctlJkG4aRp5uXzpsN7JWHltgEavcTt6UMP/0M=
 github.com/starslipay/order_mgr v1.0.0/go.mod h1:VC3G3I5+O7xKr0GuKeLsIkVihrW3Sq8F4O4Bb0RfU5M=
 github.com/starslipay/order_mgr v1.0.1 h1:JuKBfFsG+IsF75AjalwH7+7FV5mAr1TmYI3ZMby/PYw=
