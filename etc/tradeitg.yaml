@@ -49,3 +49,9 @@ OrderMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: ordermgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+
+# Prometheus 指标采集：go-zero 会另起一个独立 HTTP 端口暴露 /metrics
+Prometheus:
+  Host: 0.0.0.0
+  Port: 9090
+  Path: /metrics
