@@ -1,6 +1,9 @@
 Name: tradeitg.rpc
 ListenOn: 0.0.0.0:8080
 Timeout: 10000
+# 关闭服务端熔断(其它中间件保持默认开启)
+Middlewares:
+  Breaker: false
 Etcd:
   Hosts:
     - etcd:2379
@@ -18,6 +21,8 @@ UserMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: usermgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+  Middlewares:
+    Breaker: false  # 关闭客户端熔断
 
 AccountMgrRpcConfig:
   Etcd:
@@ -28,6 +33,8 @@ AccountMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: accountmgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+  Middlewares:
+    Breaker: false  # 关闭客户端熔断
 
 TradeIdMgrRpcConfig:
   Etcd:
@@ -38,6 +45,8 @@ TradeIdMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: tradeidmgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+  Middlewares:
+    Breaker: false  # 关闭客户端熔断
 
 
 OrderMgrRpcConfig:
@@ -49,6 +58,8 @@ OrderMgrRpcConfig:
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
     Key: ordermgr.rpc  # 注册到etcd的服务key，客户端要对应这个key
   Timeout: 10000  # 超时时间，单位毫秒
+  Middlewares:
+    Breaker: false  # 关闭客户端熔断
 
 # Prometheus 指标采集：go-zero 会另起一个独立 HTTP 端口暴露 /metrics
 Prometheus:
