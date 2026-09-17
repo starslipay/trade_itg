@@ -110,7 +110,8 @@ func (l *C2cTransferDoLogic) c2CFinal(in *trade_itg_pb.C2CTransferDoReq, checkPa
 		SellerUserId:  in.SellerUserId,
 		Amount:        in.Amount,
 		CurType:       1,
-		Desc:          "c2c transfer(final)",
+		Desc:          "c2c",
+		Memo:          in.Memo,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "AccountMgr.C2CFinal")

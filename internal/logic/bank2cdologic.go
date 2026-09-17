@@ -44,7 +44,7 @@ func (l *Bank2CDoLogic) checkInputParams(in *trade_itg_pb.Bank2CDoReq) error {
 	if in.Amount <= 0 {
 		return xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "Amount is empty")
 	}
-	if in.Desc == "" {
+	if in.Memo == "" {
 		return xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "Desc is empty")
 	}
 	return nil
@@ -73,7 +73,8 @@ func (l *Bank2CDoLogic) Bank2C(in *trade_itg_pb.Bank2CDoReq, userRsp *user_mgr_p
 		BankType:      in.BankType,
 		Amount:        in.Amount,
 		CurType:       1,
-		Desc:          in.Desc,
+		Desc:          "bank2c",
+		Memo:          in.Memo,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "AccountMgr.Bank2C")

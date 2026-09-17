@@ -22,6 +22,7 @@ message C2cTransferDoReq {
     int32 verify_type = 6;
     string password = 7;
     int32 version = 8;  // c2c转账版本
+    string memo = 9;  // c2c转账备注
 }
 
 message C2cTransferDoRsp {
@@ -45,7 +46,7 @@ message Bank2CDoReq {
     string user_id = 2;
     int32 bank_type = 3;
     int64 amount = 4;
-    string desc = 5;
+    string memo = 5;
     int32 verify_type = 6;
     string password = 7;
 }
@@ -70,7 +71,7 @@ message C2BankDoReq {
     string user_id = 2;
     int32 bank_type = 3;
     int64 amount = 4;
-    string desc = 5;
+    string memo = 5;
     int32 verify_type = 6;
     string password = 7;
 }
