@@ -44,9 +44,6 @@ func (l *C2BankDoLogic) checkInputParams(in *trade_itg_pb.C2BankDoReq) error {
 	if in.Amount <= 0 {
 		return xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "Amount is empty")
 	}
-	if in.Memo == "" {
-		return xerror.NewBizError(codes.Internal, xerr.ErrCodeParams, "Desc is empty")
-	}
 	return nil
 }
 
