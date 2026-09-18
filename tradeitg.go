@@ -6,6 +6,7 @@ import (
 
 	"github.com/starslipay/trade_itg/internal/config"
 	"github.com/starslipay/trade_itg/internal/metrics"
+	"github.com/starslipay/trade_itg/internal/middleware"
 	"github.com/starslipay/trade_itg/internal/server"
 	"github.com/starslipay/trade_itg/internal/svc"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
@@ -34,6 +35,12 @@ func main() {
 		}
 	})
 	s.AddUnaryInterceptors(metrics.UnaryMetricInterceptor)
+	// gRPC 访问日志拦截器(按字段名脱敏)
+	if c.AccessLog.Enable {
+		s.AddUnaryInterceptors(middleware.AccessLogUnaryInterceptor(
+			middleware.NewSensitiveFields(c.AccessLog.SensitiveFields),
+		))
+	}
 	defer s.Stop()
 
 	fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
