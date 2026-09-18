@@ -109,6 +109,8 @@ func (l *BanPayLogic) C2BFinal(in *trade_itg_pb.BanPayReq, userRsp *user_mgr_pb.
 		MerchantId:    in.MerchantId,
 		Amount:        in.Amount,
 		CurType:       1,
+		Desc:          "c2b",
+		Memo:          in.Memo,
 	})
 	if err != nil {
 		return nil, xerror.HandleRPCError(err, "AccountMgr.C2BFinal")

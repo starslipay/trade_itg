@@ -902,6 +902,7 @@ type BanPayReq struct {
 	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
 	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
 	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
+	Memo          string                 `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -981,6 +982,13 @@ func (x *BanPayReq) GetVerifyType() int32 {
 func (x *BanPayReq) GetPassword() string {
 	if x != nil {
 		return x.Password
+	}
+	return ""
+}
+
+func (x *BanPayReq) GetMemo() string {
+	if x != nil {
+		return x.Memo
 	}
 	return ""
 }
@@ -1321,7 +1329,7 @@ const file_trade_itg_proto_rawDesc = "" +
 	"merchantId\"K\n" +
 	"\tPayPreRsp\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xe3\x01\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xf7\x01\n" +
 	"\tBanPayReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
 	"\fout_order_no\x18\x02 \x01(\tR\n" +
@@ -1332,7 +1340,8 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x1f\n" +
 	"\vverify_type\x18\x06 \x01(\x05R\n" +
 	"verifyType\x12\x1a\n" +
-	"\bpassword\x18\a \x01(\tR\bpassword\"\xf1\x01\n" +
+	"\bpassword\x18\a \x01(\tR\bpassword\x12\x12\n" +
+	"\x04memo\x18\b \x01(\tR\x04memo\"\xf1\x01\n" +
 	"\tBanPayRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
 	"\fout_order_no\x18\x02 \x01(\tR\n" +

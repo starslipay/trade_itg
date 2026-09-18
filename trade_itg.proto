@@ -100,6 +100,7 @@ message BanPayReq {
     int64 amount = 5;
     int32 verify_type = 6;
     string password = 7;
+    string memo = 8;
 }
 
 message BanPayRsp {
