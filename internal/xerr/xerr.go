@@ -4,19 +4,18 @@ package xerr
 // 模块id  40000
 // 错误码 = 模块id + 业务错误码
 var (
-	ModuleId        = int64(455902)
-	ModuleErrorBase = ModuleId * 100
+	ModuleId = int64(455902)
 )
 
 var (
 	// 系统错误 0000-0999
-	ErrCodeSystem = ModuleErrorBase + 0
+	ErrCodeSystem = 455902000
 
 	// 业务错误码 1000-1999
-	ErrCodeSellerNotExist         = ModuleErrorBase + 100 // 卖方不存在
-	ErrCodeParams                 = ModuleErrorBase + 101 // 参数错误
-	ErrCodeReqAndRspUnMatch       = ModuleErrorBase + 102 // 请求参数和响应参数不匹配
-	ErrCodeCheckOrderSuccessToken = ModuleErrorBase + 103 // 订单成功token校验失败
+	ErrCodeSellerNotExist         = int64(455902100) // 卖方不存在
+	ErrCodeParams                 = int64(455902101) // 参数错误
+	ErrCodeReqAndRspUnMatch       = int64(455902102) // 请求参数和响应参数不匹配
+	ErrCodeCheckOrderSuccessToken = int64(455902103) // 订单成功token校验失败
 )
 
 var (
