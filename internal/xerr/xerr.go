@@ -4,8 +4,8 @@ package xerr
 // 模块id  40000
 // 错误码 = 模块id + 业务错误码
 var (
-	ModuleId        = int64(40000)
-	ModuleErrorBase = ModuleId * 10000
+	ModuleId        = int64(455902)
+	ModuleErrorBase = ModuleId * 100
 )
 
 var (
@@ -13,13 +13,13 @@ var (
 	ErrCodeSystem = ModuleErrorBase + 0
 
 	// 业务错误码 1000-1999
-	ErrCodeSellerNotExist         = ModuleErrorBase + 1000 // 卖方不存在
-	ErrCodeParams                 = ModuleErrorBase + 1001 // 参数错误
-	ErrCodeReqAndRspUnMatch       = ModuleErrorBase + 1002 // 请求参数和响应参数不匹配
-	ErrCodeCheckOrderSuccessToken = ModuleErrorBase + 1003 // 订单成功token校验失败
+	ErrCodeSellerNotExist         = ModuleErrorBase + 100 // 卖方不存在
+	ErrCodeParams                 = ModuleErrorBase + 101 // 参数错误
+	ErrCodeReqAndRspUnMatch       = ModuleErrorBase + 102 // 请求参数和响应参数不匹配
+	ErrCodeCheckOrderSuccessToken = ModuleErrorBase + 103 // 订单成功token校验失败
 )
 
 var (
-	// user_mgr 错误码
-	UserMgrErrCodeUserNotExist = int64(200001001)
+	// user_mgr 错误码用户不存在
+	UserMgrErrCodeUserNotExist = int64(455904101)
 )
