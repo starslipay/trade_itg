@@ -3,7 +3,9 @@ ListenOn: 0.0.0.0:8080
 Timeout: 10000
 Etcd:
   Hosts:
-    - etcd:2379
+    - etcd:2379  # etcd 集群节点1
+    - etcd2:2379 # etcd 集群节点2, 任一节点可用即可
+    - etcd3:2379 # etcd 集群节点3
     # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
@@ -16,7 +18,9 @@ CpuThreshold: 0 # 0 关闭CPU过载降载兜底保护
 UserMgrRpcConfig:
   Etcd:
     Hosts:
-    - etcd:2379
+    - etcd:2379  # etcd 集群节点1
+    - etcd2:2379 # etcd 集群节点2, 任一节点可用即可
+    - etcd3:2379 # etcd 集群节点3
     # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
@@ -28,7 +32,9 @@ UserMgrRpcConfig:
 AccountMgrRpcConfig:
   Etcd:
     Hosts:
-    - etcd:2379
+    - etcd:2379  # etcd 集群节点1
+    - etcd2:2379 # etcd 集群节点2, 任一节点可用即可
+    - etcd3:2379 # etcd 集群节点3
     # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
@@ -40,7 +46,9 @@ AccountMgrRpcConfig:
 TradeIdMgrRpcConfig:
   Etcd:
     Hosts:
-    - etcd:2379
+    - etcd:2379  # etcd 集群节点1
+    - etcd2:2379 # etcd 集群节点2, 任一节点可用即可
+    - etcd3:2379 # etcd 集群节点3
     # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
@@ -52,7 +60,9 @@ TradeIdMgrRpcConfig:
 OrderMgrRpcConfig:
   Etcd:
     Hosts:
-    - etcd:2379
+    - etcd:2379  # etcd 集群节点1
+    - etcd2:2379 # etcd 集群节点2, 任一节点可用即可
+    - etcd3:2379 # etcd 集群节点3
     # - etcd-0.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-1.etcd.pay-ns.svc.cluster.local:2379
     # - etcd-2.etcd.pay-ns.svc.cluster.local:2379
