@@ -67,3 +67,9 @@ func (s *TradeItgServer) CloseOrSupplyOrder(ctx context.Context, in *trade_itg_p
 	l := logic.NewCloseOrSupplyOrderLogic(ctx, s.svcCtx)
 	return l.CloseOrSupplyOrder(in)
 }
+
+// 补单: 仅将已成功 C2B 转账单对应的订单更新为成功
+func (s *TradeItgServer) SupplyOrder(ctx context.Context, in *trade_itg_pb.SupplyOrderReq) (*trade_itg_pb.SupplyOrderRsp, error) {
+	l := logic.NewSupplyOrderLogic(ctx, s.svcCtx)
+	return l.SupplyOrder(in)
+}

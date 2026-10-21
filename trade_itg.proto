@@ -132,6 +132,26 @@ message CloseOrSupplyOrderRsp {
     string order_success_token = 8;
 }
 
+// 补单请求: 单号 + 关键数据, 用于和 C2B 转账单做一致性校验
+message SupplyOrderReq {
+    string transaction_id = 1;
+    string out_order_no = 2;
+    string merchant_id = 3;
+    string user_id = 4;
+    int64 amount = 5;
+}
+
+// 补单响应: 返回订单成功后的完整信息
+message SupplyOrderRsp {
+    string transaction_id = 1;
+    string out_order_no = 2;
+    string user_id = 3;
+    string merchant_id = 4;
+    int64 amount = 5;
+    string pay_time = 6;
+    string order_success_token = 7;
+}
+
 service TradeItg {
     rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
     rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
@@ -143,6 +163,8 @@ service TradeItg {
     rpc PayPre(PayPreReq) returns (PayPreRsp);
     rpc BanPay(BanPayReq) returns (BanPayRsp);
     rpc CloseOrSupplyOrder(CloseOrSupplyOrderReq) returns (CloseOrSupplyOrderRsp);
+    // 补单: 仅将已成功 C2B 转账单对应的订单更新为成功
+    rpc SupplyOrder(SupplyOrderReq) returns (SupplyOrderRsp);
 }
 
 /*

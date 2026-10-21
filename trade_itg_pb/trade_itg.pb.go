@@ -1261,6 +1261,176 @@ func (x *CloseOrSupplyOrderRsp) GetOrderSuccessToken() string {
 	return ""
 }
 
+// 补单请求: 单号 + 关键数据, 用于和 C2B 转账单做一致性校验
+type SupplyOrderReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutOrderNo    string                 `protobuf:"bytes,2,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	MerchantId    string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	UserId        string                 `protobuf:"bytes,4,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Amount        int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SupplyOrderReq) Reset() {
+	*x = SupplyOrderReq{}
+	mi := &file_trade_itg_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplyOrderReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplyOrderReq) ProtoMessage() {}
+
+func (x *SupplyOrderReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplyOrderReq.ProtoReflect.Descriptor instead.
+func (*SupplyOrderReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *SupplyOrderReq) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *SupplyOrderReq) GetOutOrderNo() string {
+	if x != nil {
+		return x.OutOrderNo
+	}
+	return ""
+}
+
+func (x *SupplyOrderReq) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *SupplyOrderReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SupplyOrderReq) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+// 补单响应: 返回订单成功后的完整信息
+type SupplyOrderRsp struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId     string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	OutOrderNo        string                 `protobuf:"bytes,2,opt,name=out_order_no,json=outOrderNo,proto3" json:"out_order_no,omitempty"`
+	UserId            string                 `protobuf:"bytes,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,4,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	Amount            int64                  `protobuf:"varint,5,opt,name=amount,proto3" json:"amount,omitempty"`
+	PayTime           string                 `protobuf:"bytes,6,opt,name=pay_time,json=payTime,proto3" json:"pay_time,omitempty"`
+	OrderSuccessToken string                 `protobuf:"bytes,7,opt,name=order_success_token,json=orderSuccessToken,proto3" json:"order_success_token,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SupplyOrderRsp) Reset() {
+	*x = SupplyOrderRsp{}
+	mi := &file_trade_itg_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SupplyOrderRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SupplyOrderRsp) ProtoMessage() {}
+
+func (x *SupplyOrderRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SupplyOrderRsp.ProtoReflect.Descriptor instead.
+func (*SupplyOrderRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *SupplyOrderRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+func (x *SupplyOrderRsp) GetOutOrderNo() string {
+	if x != nil {
+		return x.OutOrderNo
+	}
+	return ""
+}
+
+func (x *SupplyOrderRsp) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *SupplyOrderRsp) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *SupplyOrderRsp) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *SupplyOrderRsp) GetPayTime() string {
+	if x != nil {
+		return x.PayTime
+	}
+	return ""
+}
+
+func (x *SupplyOrderRsp) GetOrderSuccessToken() string {
+	if x != nil {
+		return x.OrderSuccessToken
+	}
+	return ""
+}
+
 var File_trade_itg_proto protoreflect.FileDescriptor
 
 const file_trade_itg_proto_rawDesc = "" +
@@ -1371,7 +1541,25 @@ const file_trade_itg_proto_rawDesc = "" +
 	"merchantId\x12\x16\n" +
 	"\x06amount\x18\x06 \x01(\x03R\x06amount\x12\x19\n" +
 	"\bpay_time\x18\a \x01(\tR\apayTime\x12.\n" +
-	"\x13order_success_token\x18\b \x01(\tR\x11orderSuccessToken2\xdf\x04\n" +
+	"\x13order_success_token\x18\b \x01(\tR\x11orderSuccessToken\"\xab\x01\n" +
+	"\x0eSupplyOrderReq\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x02 \x01(\tR\n" +
+	"outOrderNo\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x17\n" +
+	"\auser_id\x18\x04 \x01(\tR\x06userId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\"\xf6\x01\n" +
+	"\x0eSupplyOrderRsp\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
+	"\fout_order_no\x18\x02 \x01(\tR\n" +
+	"outOrderNo\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\tR\x06userId\x12\x1f\n" +
+	"\vmerchant_id\x18\x04 \x01(\tR\n" +
+	"merchantId\x12\x16\n" +
+	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x19\n" +
+	"\bpay_time\x18\x06 \x01(\tR\apayTime\x12.\n" +
+	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken2\xa4\x05\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
@@ -1381,7 +1569,8 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\bC2BankDo\x12\x16.trade_itg.C2BankDoReq\x1a\x16.trade_itg.C2BankDoRsp\x124\n" +
 	"\x06PayPre\x12\x14.trade_itg.PayPreReq\x1a\x14.trade_itg.PayPreRsp\x124\n" +
 	"\x06BanPay\x12\x14.trade_itg.BanPayReq\x1a\x14.trade_itg.BanPayRsp\x12X\n" +
-	"\x12CloseOrSupplyOrder\x12 .trade_itg.CloseOrSupplyOrderReq\x1a .trade_itg.CloseOrSupplyOrderRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
+	"\x12CloseOrSupplyOrder\x12 .trade_itg.CloseOrSupplyOrderReq\x1a .trade_itg.CloseOrSupplyOrderRsp\x12C\n" +
+	"\vSupplyOrder\x12\x19.trade_itg.SupplyOrderReq\x1a\x19.trade_itg.SupplyOrderRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
 
 var (
 	file_trade_itg_proto_rawDescOnce sync.Once
@@ -1395,7 +1584,7 @@ func file_trade_itg_proto_rawDescGZIP() []byte {
 	return file_trade_itg_proto_rawDescData
 }
 
-var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_trade_itg_proto_goTypes = []any{
 	(*C2CTransferPreReq)(nil),     // 0: trade_itg.C2cTransferPreReq
 	(*C2CTransferPreRsp)(nil),     // 1: trade_itg.C2cTransferPreRsp
@@ -1415,6 +1604,8 @@ var file_trade_itg_proto_goTypes = []any{
 	(*BanPayRsp)(nil),             // 15: trade_itg.BanPayRsp
 	(*CloseOrSupplyOrderReq)(nil), // 16: trade_itg.CloseOrSupplyOrderReq
 	(*CloseOrSupplyOrderRsp)(nil), // 17: trade_itg.CloseOrSupplyOrderRsp
+	(*SupplyOrderReq)(nil),        // 18: trade_itg.SupplyOrderReq
+	(*SupplyOrderRsp)(nil),        // 19: trade_itg.SupplyOrderRsp
 }
 var file_trade_itg_proto_depIdxs = []int32{
 	0,  // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
@@ -1426,17 +1617,19 @@ var file_trade_itg_proto_depIdxs = []int32{
 	12, // 6: trade_itg.TradeItg.PayPre:input_type -> trade_itg.PayPreReq
 	14, // 7: trade_itg.TradeItg.BanPay:input_type -> trade_itg.BanPayReq
 	16, // 8: trade_itg.TradeItg.CloseOrSupplyOrder:input_type -> trade_itg.CloseOrSupplyOrderReq
-	1,  // 9: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
-	3,  // 10: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
-	5,  // 11: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
-	7,  // 12: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
-	9,  // 13: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
-	11, // 14: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
-	13, // 15: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
-	15, // 16: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
-	17, // 17: trade_itg.TradeItg.CloseOrSupplyOrder:output_type -> trade_itg.CloseOrSupplyOrderRsp
-	9,  // [9:18] is the sub-list for method output_type
-	0,  // [0:9] is the sub-list for method input_type
+	18, // 9: trade_itg.TradeItg.SupplyOrder:input_type -> trade_itg.SupplyOrderReq
+	1,  // 10: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
+	3,  // 11: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
+	5,  // 12: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
+	7,  // 13: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
+	9,  // 14: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
+	11, // 15: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
+	13, // 16: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
+	15, // 17: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
+	17, // 18: trade_itg.TradeItg.CloseOrSupplyOrder:output_type -> trade_itg.CloseOrSupplyOrderRsp
+	19, // 19: trade_itg.TradeItg.SupplyOrder:output_type -> trade_itg.SupplyOrderRsp
+	10, // [10:20] is the sub-list for method output_type
+	0,  // [0:10] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -1453,7 +1646,7 @@ func file_trade_itg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_itg_proto_rawDesc), len(file_trade_itg_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
