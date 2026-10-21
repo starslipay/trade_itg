@@ -1431,6 +1431,96 @@ func (x *SupplyOrderRsp) GetOrderSuccessToken() string {
 	return ""
 }
 
+// 关单请求: 仅需单号
+type CloseOrderReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloseOrderReq) Reset() {
+	*x = CloseOrderReq{}
+	mi := &file_trade_itg_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloseOrderReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloseOrderReq) ProtoMessage() {}
+
+func (x *CloseOrderReq) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloseOrderReq.ProtoReflect.Descriptor instead.
+func (*CloseOrderReq) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *CloseOrderReq) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
+// 关单响应
+type CloseOrderRsp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TransactionId string                 `protobuf:"bytes,1,opt,name=transaction_id,json=transactionId,proto3" json:"transaction_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CloseOrderRsp) Reset() {
+	*x = CloseOrderRsp{}
+	mi := &file_trade_itg_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CloseOrderRsp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CloseOrderRsp) ProtoMessage() {}
+
+func (x *CloseOrderRsp) ProtoReflect() protoreflect.Message {
+	mi := &file_trade_itg_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CloseOrderRsp.ProtoReflect.Descriptor instead.
+func (*CloseOrderRsp) Descriptor() ([]byte, []int) {
+	return file_trade_itg_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *CloseOrderRsp) GetTransactionId() string {
+	if x != nil {
+		return x.TransactionId
+	}
+	return ""
+}
+
 var File_trade_itg_proto protoreflect.FileDescriptor
 
 const file_trade_itg_proto_rawDesc = "" +
@@ -1559,7 +1649,11 @@ const file_trade_itg_proto_rawDesc = "" +
 	"merchantId\x12\x16\n" +
 	"\x06amount\x18\x05 \x01(\x03R\x06amount\x12\x19\n" +
 	"\bpay_time\x18\x06 \x01(\tR\apayTime\x12.\n" +
-	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken2\xa4\x05\n" +
+	"\x13order_success_token\x18\a \x01(\tR\x11orderSuccessToken\"6\n" +
+	"\rCloseOrderReq\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\"6\n" +
+	"\rCloseOrderRsp\x12%\n" +
+	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId2\xe6\x05\n" +
 	"\bTradeItg\x12L\n" +
 	"\x0eC2cTransferPre\x12\x1c.trade_itg.C2cTransferPreReq\x1a\x1c.trade_itg.C2cTransferPreRsp\x12I\n" +
 	"\rC2cTransferDo\x12\x1b.trade_itg.C2cTransferDoReq\x1a\x1b.trade_itg.C2cTransferDoRsp\x12=\n" +
@@ -1570,7 +1664,9 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\x06PayPre\x12\x14.trade_itg.PayPreReq\x1a\x14.trade_itg.PayPreRsp\x124\n" +
 	"\x06BanPay\x12\x14.trade_itg.BanPayReq\x1a\x14.trade_itg.BanPayRsp\x12X\n" +
 	"\x12CloseOrSupplyOrder\x12 .trade_itg.CloseOrSupplyOrderReq\x1a .trade_itg.CloseOrSupplyOrderRsp\x12C\n" +
-	"\vSupplyOrder\x12\x19.trade_itg.SupplyOrderReq\x1a\x19.trade_itg.SupplyOrderRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
+	"\vSupplyOrder\x12\x19.trade_itg.SupplyOrderReq\x1a\x19.trade_itg.SupplyOrderRsp\x12@\n" +
+	"\n" +
+	"CloseOrder\x12\x18.trade_itg.CloseOrderReq\x1a\x18.trade_itg.CloseOrderRspB\x10Z\x0e./trade_itg_pbb\x06proto3"
 
 var (
 	file_trade_itg_proto_rawDescOnce sync.Once
@@ -1584,7 +1680,7 @@ func file_trade_itg_proto_rawDescGZIP() []byte {
 	return file_trade_itg_proto_rawDescData
 }
 
-var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_trade_itg_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_trade_itg_proto_goTypes = []any{
 	(*C2CTransferPreReq)(nil),     // 0: trade_itg.C2cTransferPreReq
 	(*C2CTransferPreRsp)(nil),     // 1: trade_itg.C2cTransferPreRsp
@@ -1606,6 +1702,8 @@ var file_trade_itg_proto_goTypes = []any{
 	(*CloseOrSupplyOrderRsp)(nil), // 17: trade_itg.CloseOrSupplyOrderRsp
 	(*SupplyOrderReq)(nil),        // 18: trade_itg.SupplyOrderReq
 	(*SupplyOrderRsp)(nil),        // 19: trade_itg.SupplyOrderRsp
+	(*CloseOrderReq)(nil),         // 20: trade_itg.CloseOrderReq
+	(*CloseOrderRsp)(nil),         // 21: trade_itg.CloseOrderRsp
 }
 var file_trade_itg_proto_depIdxs = []int32{
 	0,  // 0: trade_itg.TradeItg.C2cTransferPre:input_type -> trade_itg.C2cTransferPreReq
@@ -1618,18 +1716,20 @@ var file_trade_itg_proto_depIdxs = []int32{
 	14, // 7: trade_itg.TradeItg.BanPay:input_type -> trade_itg.BanPayReq
 	16, // 8: trade_itg.TradeItg.CloseOrSupplyOrder:input_type -> trade_itg.CloseOrSupplyOrderReq
 	18, // 9: trade_itg.TradeItg.SupplyOrder:input_type -> trade_itg.SupplyOrderReq
-	1,  // 10: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
-	3,  // 11: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
-	5,  // 12: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
-	7,  // 13: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
-	9,  // 14: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
-	11, // 15: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
-	13, // 16: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
-	15, // 17: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
-	17, // 18: trade_itg.TradeItg.CloseOrSupplyOrder:output_type -> trade_itg.CloseOrSupplyOrderRsp
-	19, // 19: trade_itg.TradeItg.SupplyOrder:output_type -> trade_itg.SupplyOrderRsp
-	10, // [10:20] is the sub-list for method output_type
-	0,  // [0:10] is the sub-list for method input_type
+	20, // 10: trade_itg.TradeItg.CloseOrder:input_type -> trade_itg.CloseOrderReq
+	1,  // 11: trade_itg.TradeItg.C2cTransferPre:output_type -> trade_itg.C2cTransferPreRsp
+	3,  // 12: trade_itg.TradeItg.C2cTransferDo:output_type -> trade_itg.C2cTransferDoRsp
+	5,  // 13: trade_itg.TradeItg.Bank2CPre:output_type -> trade_itg.Bank2CPreRsp
+	7,  // 14: trade_itg.TradeItg.Bank2CDo:output_type -> trade_itg.Bank2CDoRsp
+	9,  // 15: trade_itg.TradeItg.C2BankPre:output_type -> trade_itg.C2BankPreRsp
+	11, // 16: trade_itg.TradeItg.C2BankDo:output_type -> trade_itg.C2BankDoRsp
+	13, // 17: trade_itg.TradeItg.PayPre:output_type -> trade_itg.PayPreRsp
+	15, // 18: trade_itg.TradeItg.BanPay:output_type -> trade_itg.BanPayRsp
+	17, // 19: trade_itg.TradeItg.CloseOrSupplyOrder:output_type -> trade_itg.CloseOrSupplyOrderRsp
+	19, // 20: trade_itg.TradeItg.SupplyOrder:output_type -> trade_itg.SupplyOrderRsp
+	21, // 21: trade_itg.TradeItg.CloseOrder:output_type -> trade_itg.CloseOrderRsp
+	11, // [11:22] is the sub-list for method output_type
+	0,  // [0:11] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -1646,7 +1746,7 @@ func file_trade_itg_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_trade_itg_proto_rawDesc), len(file_trade_itg_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

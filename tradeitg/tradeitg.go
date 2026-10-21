@@ -30,6 +30,8 @@ type (
 	C2CTransferPreRsp     = trade_itg_pb.C2CTransferPreRsp
 	CloseOrSupplyOrderReq = trade_itg_pb.CloseOrSupplyOrderReq
 	CloseOrSupplyOrderRsp = trade_itg_pb.CloseOrSupplyOrderRsp
+	CloseOrderReq         = trade_itg_pb.CloseOrderReq
+	CloseOrderRsp         = trade_itg_pb.CloseOrderRsp
 	PayPreReq             = trade_itg_pb.PayPreReq
 	PayPreRsp             = trade_itg_pb.PayPreRsp
 	SupplyOrderReq        = trade_itg_pb.SupplyOrderReq
@@ -47,6 +49,8 @@ type (
 		CloseOrSupplyOrder(ctx context.Context, in *CloseOrSupplyOrderReq, opts ...grpc.CallOption) (*CloseOrSupplyOrderRsp, error)
 		// 补单: 仅将已成功 C2B 转账单对应的订单更新为成功
 		SupplyOrder(ctx context.Context, in *SupplyOrderReq, opts ...grpc.CallOption) (*SupplyOrderRsp, error)
+		// 关单: 仅将已关单 C2B 转账单对应的订单关闭
+		CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderRsp, error)
 	}
 
 	defaultTradeItg struct {
@@ -109,4 +113,10 @@ func (m *defaultTradeItg) CloseOrSupplyOrder(ctx context.Context, in *CloseOrSup
 func (m *defaultTradeItg) SupplyOrder(ctx context.Context, in *SupplyOrderReq, opts ...grpc.CallOption) (*SupplyOrderRsp, error) {
 	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
 	return client.SupplyOrder(ctx, in, opts...)
+}
+
+// 关单: 仅将已关单 C2B 转账单对应的订单关闭
+func (m *defaultTradeItg) CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.CloseOrder(ctx, in, opts...)
 }

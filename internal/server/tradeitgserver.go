@@ -73,3 +73,9 @@ func (s *TradeItgServer) SupplyOrder(ctx context.Context, in *trade_itg_pb.Suppl
 	l := logic.NewSupplyOrderLogic(ctx, s.svcCtx)
 	return l.SupplyOrder(in)
 }
+
+// 关单: 仅将已关单 C2B 转账单对应的订单关闭
+func (s *TradeItgServer) CloseOrder(ctx context.Context, in *trade_itg_pb.CloseOrderReq) (*trade_itg_pb.CloseOrderRsp, error) {
+	l := logic.NewCloseOrderLogic(ctx, s.svcCtx)
+	return l.CloseOrder(in)
+}

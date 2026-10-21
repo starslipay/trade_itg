@@ -152,6 +152,16 @@ message SupplyOrderRsp {
     string order_success_token = 7;
 }
 
+// 关单请求: 仅需单号
+message CloseOrderReq {
+    string transaction_id = 1;
+}
+
+// 关单响应
+message CloseOrderRsp {
+    string transaction_id = 1;
+}
+
 service TradeItg {
     rpc C2cTransferPre(C2cTransferPreReq) returns (C2cTransferPreRsp);
     rpc C2cTransferDo(C2cTransferDoReq) returns (C2cTransferDoRsp);
@@ -165,6 +175,8 @@ service TradeItg {
     rpc CloseOrSupplyOrder(CloseOrSupplyOrderReq) returns (CloseOrSupplyOrderRsp);
     // 补单: 仅将已成功 C2B 转账单对应的订单更新为成功
     rpc SupplyOrder(SupplyOrderReq) returns (SupplyOrderRsp);
+    // 关单: 仅将已关单 C2B 转账单对应的订单关闭
+    rpc CloseOrder(CloseOrderReq) returns (CloseOrderRsp);
 }
 
 /*
