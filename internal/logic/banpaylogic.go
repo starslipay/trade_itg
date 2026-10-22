@@ -103,6 +103,7 @@ func (l *BanPayLogic) banPayPreOrder(in *trade_itg_pb.BanPayReq, userRsp *user_m
 func (l *BanPayLogic) C2BFinal(in *trade_itg_pb.BanPayReq, userRsp *user_mgr_pb.CheckPasswordRsp, merchantRsp *user_mgr_pb.GetMerchantInfoRsp) (*account_mgr_pb.C2BRsp, error) {
 	c2BRsp, err := l.svcCtx.AccountMgr.C2BFinal(l.ctx, &account_mgr_pb.C2BReq{
 		TransactionId: in.TransactionId,
+		OutTradeNo:    in.OutOrderNo,
 		Uid:           userRsp.Uid,
 		UserId:        in.UserId,
 		MerchantUid:   merchantRsp.MerchantUid,
