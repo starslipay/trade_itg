@@ -165,10 +165,22 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		return nil, err
 	}
 
+	// [Mock 断点1] 下单前中断
+	if l.svcCtx.Config.Debug.BreakBeforePreOrder {
+		logx.WithContext(l.ctx).Errorf("[MOCK] BreakBeforePreOrder triggered, transaction_id: %s", in.TransactionId)
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeMockBreakpoint, "mock breakpoint: before banPayPreOrder")
+	}
+
 	// 订单下单
 	_, err = l.banPayPreOrder(in, userRsp, merchantRsp)
 	if err != nil {
 		return nil, err
+	}
+
+	// [Mock 断点2] C2B 扣款前中断
+	if l.svcCtx.Config.Debug.BreakBeforeC2B {
+		logx.WithContext(l.ctx).Errorf("[MOCK] BreakBeforeC2B triggered, transaction_id: %s", in.TransactionId)
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeMockBreakpoint, "mock breakpoint: before C2BFinal")
 	}
 
 	// 去账户服务扣款
@@ -177,10 +189,22 @@ func (l *BanPayLogic) BanPay(in *trade_itg_pb.BanPayReq) (*trade_itg_pb.BanPayRs
 		return nil, err
 	}
 
+	// [Mock 断点3] 订单更新成功前中断(C2B 已扣款但订单未更新, 演练 SupplyOrder 补单)
+	if l.svcCtx.Config.Debug.BreakBeforeOrderSuccess {
+		logx.WithContext(l.ctx).Errorf("[MOCK] BreakBeforeOrderSuccess triggered, transaction_id: %s, c2b already deducted", in.TransactionId)
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeMockBreakpoint, "mock breakpoint: before banPaySuccessOrder (c2b already succeeded, order NOT updated)")
+	}
+
 	// 订单更新成功
 	orderSuccessRsp, err := l.banPaySuccessOrder(in, c2BRsp, merchantRsp, userRsp)
 	if err != nil {
 		return nil, err
+	}
+
+	// [Mock 断点4] 订单更新成功后中断(订单已更新成功但响应未返回, 重试时订单已是成功态)
+	if l.svcCtx.Config.Debug.BreakAfterOrderSuccess {
+		logx.WithContext(l.ctx).Errorf("[MOCK] BreakAfterOrderSuccess triggered, transaction_id: %s, order already success", in.TransactionId)
+		return nil, xerror.NewBizError(codes.Internal, xerr.ErrCodeMockBreakpoint, "mock breakpoint: after banPaySuccessOrder (order already success)")
 	}
 
 	// 校验订单成功签名

@@ -93,3 +93,10 @@ AccessLog:
     - old_password
     - new_password
     - pay_password
+
+# Debug: 测试用 mock 断点开关, 用于演练 BanPay 流程中断后补单/对账的行为
+Debug:
+  BreakBeforePreOrder: false       # 下单前中断(默认关)
+  BreakBeforeC2B: false            # C2B 扣款前中断(默认关)
+  BreakBeforeOrderSuccess: false   # 订单更新成功前中断, C2B 已扣款但订单未更新(演练 SupplyOrder 补单, 默认关)
+  BreakAfterOrderSuccess: false    # 订单更新成功后中断, 订单已更新但响应未返回(重试会订单已成功, 默认关)

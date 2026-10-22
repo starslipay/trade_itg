@@ -16,6 +16,7 @@ var (
 	ErrCodeParams                 = int64(455902101) // 参数错误
 	ErrCodeReqAndRspUnMatch       = int64(455902102) // 请求参数和响应参数不匹配
 	ErrCodeCheckOrderSuccessToken = int64(455902103) // 订单成功token校验失败
+	ErrCodeMockBreakpoint         = int64(455902199) // Mock 测试断点中断
 )
 
 var (
