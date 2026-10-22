@@ -903,6 +903,8 @@ type BanPayReq struct {
 	VerifyType    int32                  `protobuf:"varint,6,opt,name=verify_type,json=verifyType,proto3" json:"verify_type,omitempty"`
 	Password      string                 `protobuf:"bytes,7,opt,name=password,proto3" json:"password,omitempty"`
 	Memo          string                 `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
+	// mock_flag 测试用断点控制: 0=正常, 1=下单前中断, 2=C2B扣款前中断, 3=订单更新前中断, 4=订单更新后中断
+	MockFlag      int32 `protobuf:"varint,9,opt,name=mock_flag,json=mockFlag,proto3" json:"mock_flag,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -991,6 +993,13 @@ func (x *BanPayReq) GetMemo() string {
 		return x.Memo
 	}
 	return ""
+}
+
+func (x *BanPayReq) GetMockFlag() int32 {
+	if x != nil {
+		return x.MockFlag
+	}
+	return 0
 }
 
 type BanPayRsp struct {
@@ -1589,7 +1598,7 @@ const file_trade_itg_proto_rawDesc = "" +
 	"merchantId\"K\n" +
 	"\tPayPreRsp\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
-	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\xf7\x01\n" +
+	"\x0etransaction_id\x18\x02 \x01(\tR\rtransactionId\"\x94\x02\n" +
 	"\tBanPayReq\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
 	"\fout_order_no\x18\x02 \x01(\tR\n" +
@@ -1601,7 +1610,8 @@ const file_trade_itg_proto_rawDesc = "" +
 	"\vverify_type\x18\x06 \x01(\x05R\n" +
 	"verifyType\x12\x1a\n" +
 	"\bpassword\x18\a \x01(\tR\bpassword\x12\x12\n" +
-	"\x04memo\x18\b \x01(\tR\x04memo\"\xf1\x01\n" +
+	"\x04memo\x18\b \x01(\tR\x04memo\x12\x1b\n" +
+	"\tmock_flag\x18\t \x01(\x05R\bmockFlag\"\xf1\x01\n" +
 	"\tBanPayRsp\x12%\n" +
 	"\x0etransaction_id\x18\x01 \x01(\tR\rtransactionId\x12 \n" +
 	"\fout_order_no\x18\x02 \x01(\tR\n" +

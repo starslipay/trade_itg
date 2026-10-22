@@ -101,6 +101,8 @@ message BanPayReq {
     int32 verify_type = 6;
     string password = 7;
     string memo = 8;
+    // mock_flag 测试用断点控制: 0=正常, 1=下单前中断, 2=C2B扣款前中断, 3=订单更新前中断, 4=订单更新后中断
+    int32 mock_flag = 9;
 }
 
 message BanPayRsp {
