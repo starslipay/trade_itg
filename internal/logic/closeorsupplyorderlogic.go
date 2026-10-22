@@ -90,12 +90,12 @@ func (l *CloseOrSupplyOrderLogic) queryC2BBill(in *trade_itg_pb.CloseOrSupplyOrd
 		TransactionId: in.TransactionId,
 	})
 	if err != nil {
-		BizError, isSuccessParse := xerror.ParseBizError(err)
-		if isSuccessParse && BizError.Code == 300001009 {
+		bizErr, isSuccessParse := xerror.ParseBizError(err)
+		// C2B 单据不存在属于正常场景: 说明扣款未发生, 返回 nil 走关单逻辑
+		if isSuccessParse && bizErr.Code == xerr.AccountMgrErrCodeC2BBillNotFound {
 			return nil, nil
-		} else {
-			return nil, xerror.HandleRPCError(err, "AccountMgr.QueryC2BBill")
 		}
+		return nil, xerror.HandleRPCError(err, "AccountMgr.QueryC2BBill")
 	}
 
 	if queryC2BBillRsp.TransactionId != in.TransactionId {

@@ -23,3 +23,8 @@ var (
 	// user_mgr 错误码用户不存在
 	UserMgrErrCodeUserNotExist = int64(455904101)
 )
+
+var (
+	// account_mgr 错误码 C2B 单据不存在
+	AccountMgrErrCodeC2BBillNotFound = int64(455905109)
+)
