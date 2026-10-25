@@ -34,6 +34,8 @@ type (
 	CloseOrderRsp         = trade_itg_pb.CloseOrderRsp
 	PayPreReq             = trade_itg_pb.PayPreReq
 	PayPreRsp             = trade_itg_pb.PayPreRsp
+	RefundOrderReq        = trade_itg_pb.RefundOrderReq
+	RefundOrderRsp        = trade_itg_pb.RefundOrderRsp
 	SupplyOrderReq        = trade_itg_pb.SupplyOrderReq
 	SupplyOrderRsp        = trade_itg_pb.SupplyOrderRsp
 
@@ -51,6 +53,8 @@ type (
 		SupplyOrder(ctx context.Context, in *SupplyOrderReq, opts ...grpc.CallOption) (*SupplyOrderRsp, error)
 		// 关单: 仅将已关单 C2B 转账单对应的订单关闭
 		CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderRsp, error)
+		// 退款: 仅将已成功订单退款(B2C退款 + 订单状态改为已退款)
+		RefundOrder(ctx context.Context, in *RefundOrderReq, opts ...grpc.CallOption) (*RefundOrderRsp, error)
 	}
 
 	defaultTradeItg struct {
@@ -119,4 +123,10 @@ func (m *defaultTradeItg) SupplyOrder(ctx context.Context, in *SupplyOrderReq, o
 func (m *defaultTradeItg) CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderRsp, error) {
 	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
 	return client.CloseOrder(ctx, in, opts...)
+}
+
+// 退款: 仅将已成功订单退款(B2C退款 + 订单状态改为已退款)
+func (m *defaultTradeItg) RefundOrder(ctx context.Context, in *RefundOrderReq, opts ...grpc.CallOption) (*RefundOrderRsp, error) {
+	client := trade_itg_pb.NewTradeItgClient(m.cli.Conn())
+	return client.RefundOrder(ctx, in, opts...)
 }

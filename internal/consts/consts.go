@@ -3,6 +3,7 @@ package consts
 const (
 	OrderTradeStateInit    = 1  // 初始状态
 	OrderTradeStateSuccess = 2  // 成功
+	OrderTradeStateRefund  = 3  // 已退款
 	OrderTradeStateClose   = 99 // 关闭
 )
 

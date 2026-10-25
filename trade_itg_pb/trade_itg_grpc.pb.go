@@ -30,6 +30,7 @@ const (
 	TradeItg_CloseOrSupplyOrder_FullMethodName = "/trade_itg.TradeItg/CloseOrSupplyOrder"
 	TradeItg_SupplyOrder_FullMethodName        = "/trade_itg.TradeItg/SupplyOrder"
 	TradeItg_CloseOrder_FullMethodName         = "/trade_itg.TradeItg/CloseOrder"
+	TradeItg_RefundOrder_FullMethodName        = "/trade_itg.TradeItg/RefundOrder"
 )
 
 // TradeItgClient is the client API for TradeItg service.
@@ -49,6 +50,8 @@ type TradeItgClient interface {
 	SupplyOrder(ctx context.Context, in *SupplyOrderReq, opts ...grpc.CallOption) (*SupplyOrderRsp, error)
 	// 关单: 仅将已关单 C2B 转账单对应的订单关闭
 	CloseOrder(ctx context.Context, in *CloseOrderReq, opts ...grpc.CallOption) (*CloseOrderRsp, error)
+	// 退款: 仅将已成功订单退款(B2C退款 + 订单状态改为已退款)
+	RefundOrder(ctx context.Context, in *RefundOrderReq, opts ...grpc.CallOption) (*RefundOrderRsp, error)
 }
 
 type tradeItgClient struct {
@@ -169,6 +172,16 @@ func (c *tradeItgClient) CloseOrder(ctx context.Context, in *CloseOrderReq, opts
 	return out, nil
 }
 
+func (c *tradeItgClient) RefundOrder(ctx context.Context, in *RefundOrderReq, opts ...grpc.CallOption) (*RefundOrderRsp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RefundOrderRsp)
+	err := c.cc.Invoke(ctx, TradeItg_RefundOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TradeItgServer is the server API for TradeItg service.
 // All implementations must embed UnimplementedTradeItgServer
 // for forward compatibility.
@@ -186,6 +199,8 @@ type TradeItgServer interface {
 	SupplyOrder(context.Context, *SupplyOrderReq) (*SupplyOrderRsp, error)
 	// 关单: 仅将已关单 C2B 转账单对应的订单关闭
 	CloseOrder(context.Context, *CloseOrderReq) (*CloseOrderRsp, error)
+	// 退款: 仅将已成功订单退款(B2C退款 + 订单状态改为已退款)
+	RefundOrder(context.Context, *RefundOrderReq) (*RefundOrderRsp, error)
 	mustEmbedUnimplementedTradeItgServer()
 }
 
@@ -228,6 +243,9 @@ func (UnimplementedTradeItgServer) SupplyOrder(context.Context, *SupplyOrderReq)
 }
 func (UnimplementedTradeItgServer) CloseOrder(context.Context, *CloseOrderReq) (*CloseOrderRsp, error) {
 	return nil, status.Error(codes.Unimplemented, "method CloseOrder not implemented")
+}
+func (UnimplementedTradeItgServer) RefundOrder(context.Context, *RefundOrderReq) (*RefundOrderRsp, error) {
+	return nil, status.Error(codes.Unimplemented, "method RefundOrder not implemented")
 }
 func (UnimplementedTradeItgServer) mustEmbedUnimplementedTradeItgServer() {}
 func (UnimplementedTradeItgServer) testEmbeddedByValue()                  {}
@@ -448,6 +466,24 @@ func _TradeItg_CloseOrder_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TradeItg_RefundOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefundOrderReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TradeItgServer).RefundOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TradeItg_RefundOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TradeItgServer).RefundOrder(ctx, req.(*RefundOrderReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TradeItg_ServiceDesc is the grpc.ServiceDesc for TradeItg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -498,6 +534,10 @@ var TradeItg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CloseOrder",
 			Handler:    _TradeItg_CloseOrder_Handler,
+		},
+		{
+			MethodName: "RefundOrder",
+			Handler:    _TradeItg_RefundOrder_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

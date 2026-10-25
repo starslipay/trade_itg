@@ -79,3 +79,9 @@ func (s *TradeItgServer) CloseOrder(ctx context.Context, in *trade_itg_pb.CloseO
 	l := logic.NewCloseOrderLogic(ctx, s.svcCtx)
 	return l.CloseOrder(in)
 }
+
+// 退款: 仅将已成功订单退款(B2C退款 + 订单状态改为已退款)
+func (s *TradeItgServer) RefundOrder(ctx context.Context, in *trade_itg_pb.RefundOrderReq) (*trade_itg_pb.RefundOrderRsp, error) {
+	l := logic.NewRefundOrderLogic(ctx, s.svcCtx)
+	return l.RefundOrder(in)
+}
