@@ -4,7 +4,10 @@ import (
 	"context"
 
 	"github.com/starslipay/account_mgr/account_mgr_pb"
+	"github.com/starslipay/bank_channel/bank_channel_pb"
+	"github.com/starslipay/order_mgr/order_mgr_pb"
 	"github.com/starslipay/paycomm/xerror"
+	"github.com/starslipay/trade_itg/internal/consts"
 	"github.com/starslipay/trade_itg/internal/svc"
 	"github.com/starslipay/trade_itg/internal/xerr"
 	"github.com/starslipay/trade_itg/trade_itg_pb"
@@ -79,6 +82,60 @@ func (l *C2BankDoLogic) checkPassword(in *trade_itg_pb.C2BankDoReq) (*user_mgr_p
 	return userRsp, nil
 }
 
+// GetRechargeWithdrawNo 向 bank_channel 获取充值提现渠道单号
+func (l *C2BankDoLogic) GetRechargeWithdrawNo(uid int64) (string, error) {
+	rsp, err := l.svcCtx.BankChannel.GetRechargeWithdrawNo(l.ctx, &bank_channel_pb.GetRechargeWithdrawNoReq{
+		Uid: uid,
+	})
+	if err != nil {
+		return "", xerror.HandleRPCError(err, "BankChannel.GetRechargeWithdrawNo")
+	}
+	return rsp.TransactionId, nil
+}
+
+// CreateRechargeWithdrawOrder 在 order_mgr 创建充值提现单(初始状态)
+func (l *C2BankDoLogic) CreateRechargeWithdrawOrder(in *trade_itg_pb.C2BankDoReq, userRsp *user_mgr_pb.CheckPasswordRsp, channelTransactionId string) error {
+	_, err := l.svcCtx.OrderMgr.CreateRechargeWithdrawOrder(l.ctx, &order_mgr_pb.CreateRechargeWithdrawOrderReq{
+		TransactionId:        in.TransactionId,
+		ChannelTransactionId: channelTransactionId,
+		UserId:               in.UserId,
+		Uid:                  userRsp.Uid,
+		OrderType:            consts.RechargeWithdrawOrderTypeWithdraw,
+		BankType:             in.BankType,
+		Amount:               in.Amount,
+		CurType:              1,
+		Memo:                 in.Memo,
+	})
+	if err != nil {
+		return xerror.HandleRPCError(err, "OrderMgr.CreateRechargeWithdrawOrder")
+	}
+	return nil
+}
+
+// Withdraw 调用 bank_channel 去银行给用户加钱
+func (l *C2BankDoLogic) Withdraw(in *trade_itg_pb.C2BankDoReq, channelTransactionId string) error {
+	_, err := l.svcCtx.BankChannel.Withdraw(l.ctx, &bank_channel_pb.WithdrawReq{
+		TransactionId: channelTransactionId,
+		Amount:        in.Amount,
+	})
+	if err != nil {
+		return xerror.HandleRPCError(err, "BankChannel.Withdraw")
+	}
+	return nil
+}
+
+// UpdateRechargeWithdrawOrderState 更新充值提现单状态
+func (l *C2BankDoLogic) UpdateRechargeWithdrawOrderState(transactionId string, tradeState int32) error {
+	_, err := l.svcCtx.OrderMgr.UpdateRechargeWithdrawOrderState(l.ctx, &order_mgr_pb.UpdateRechargeWithdrawOrderStateReq{
+		TransactionId: transactionId,
+		TradeState:    tradeState,
+	})
+	if err != nil {
+		return xerror.HandleRPCError(err, "OrderMgr.UpdateRechargeWithdrawOrderState")
+	}
+	return nil
+}
+
 func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2BankDoRsp, error) {
 	// 校验参数
 	if err := l.checkInputParams(in); err != nil {
@@ -91,13 +148,32 @@ func (l *C2BankDoLogic) C2BankDo(in *trade_itg_pb.C2BankDoReq) (*trade_itg_pb.C2
 		return nil, err
 	}
 
-	// 调用C2Bank
+	// 向 bank_channel 获取充值提现渠道单号
+	channelTransactionId, err := l.GetRechargeWithdrawNo(userRsp.Uid)
+	if err != nil {
+		return nil, err
+	}
+
+	// 创建充值提现单(初始状态)
+	if err := l.CreateRechargeWithdrawOrder(in, userRsp, channelTransactionId); err != nil {
+		return nil, err
+	}
+
+	// 调用C2Bank (扣用户C账户)
 	c2BankRsp, err := l.C2Bank(in, userRsp)
 	if err != nil {
 		return nil, err
 	}
 
-	// TODO 去银行给用户加钱
+	// 去银行给用户加钱
+	if err := l.Withdraw(in, channelTransactionId); err != nil {
+		return nil, err
+	}
+
+	// 更新充值提现单为成功
+	if err := l.UpdateRechargeWithdrawOrderState(in.TransactionId, consts.RechargeWithdrawTradeStateSuccess); err != nil {
+		return nil, err
+	}
 
 	return &trade_itg_pb.C2BankDoRsp{
 		TransactionId: c2BankRsp.TransactionId,
